@@ -1,0 +1,190 @@
+@import "normalize";
+@import "glyphicons";
+@import url(http://fonts.googleapis.com/css?family=Raleway:900,400);
+
+@grey: #999;
+@darkGrey: #333;
+@white: #fff;
+@lightGrey: #f7f7f7;
+@lightishGrey: #eee;
+
+@cyan: #83edb8;
+@turquois: #50bcb6;
+@magenta: #ee4256;
+@orange: #fcb64b;
+
+@exp-enabled: desaturate(@turquois, 10%);
+@exp-disabled: desaturate(@magenta, 20%);
+@enabled: lighten(@exp-enabled, 20%);
+@disabled: lighten(@exp-disabled, 20%);
+
+::-webkit-scrollbar{
+  display: none;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-size: 12px;
+  overflow: hidden;
+  color: @darkGrey;
+}
+
+.main-wrap {
+  width: 350px;
+  height: auto;
+}
+
+.main-header {
+  color: @darkGrey;
+  background: @lightGrey;
+  overflow: hidden; 
+  padding: 5px;
+}
+
+.main-footer {
+  margin-top: 15px;
+  background: @lightGrey;
+  padding: 5px;
+}
+
+.main-header h3 {
+  margin: 2px 0 0 0;
+  font-size: 18px;
+  font-weight: normal;
+  font-family: 'Raleway',sans-serif;
+  float: right;
+}
+
+.main-header img {
+  display: block;
+  float: left;
+}
+
+.header-bar {
+  display: flex;
+  height: 4px;
+  margin-bottom: 8px;
+  div { height: auto; flex-grow: 1; width: auto; }
+  .magenta { background-color: @magenta; }
+  .orange { background-color: @orange; }
+  .cyan { background-color: @cyan; }
+  .turquois { background-color: @turquois; }
+}
+
+.content {
+  background: @lightGrey;
+  border-radius: 5px;
+}
+
+.content-header {
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+.content h4 {
+  font-size: 14px;
+  margin: 0 0 3px 0;
+}
+
+.sub-text {
+  margin: 0;
+  font-style: italic;
+  color: #B8B8B8;
+  font-size: 11px;
+}
+
+.ul-reset {
+  padding: 0;
+  margin: 0;
+  list-style-type: none;
+}
+
+.row-flex {
+  display: flex;
+  margin: 4px;
+  border-radius: 5px;
+  background-color: @lightishGrey;
+}
+
+.switch-name {
+  color: #666;
+  font-size: 14px;
+  font-family: 'Raleway',sans-serif;
+}
+
+.switch-name-block {
+  padding: 8px;
+}
+
+.switch-status {
+  width: 4px;
+  height: auto;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  background-color: @grey + #222;
+  .enabled & {
+    background-color: @enabled;
+  }
+  .disabled &{
+    background-color: @disabled;
+  }
+  .exp-enabled &{
+    background-color: @exp-enabled;
+  }
+  .exp-disabled &{
+    background-color: @exp-disabled;
+  }
+}
+
+.status-flipper {
+  align-self: center;
+  margin-left: auto;
+  margin-right: 8px;
+  font-size: 16px;
+  opacity: 0.6;
+  &:hover{ opacity: 1.0; cursor: pointer; }
+  color: @grey + #111;
+  .enabled & {
+    color: @enabled;
+  }
+  .disabled &{
+    color: @disabled;
+  }
+  .exp-enabled &{
+    color: @exp-enabled;
+  }
+  .exp-disabled &{
+    color: @exp-disabled;
+  }
+}
+
+.truncate {
+  width: 300px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.float-left {
+  float: left;
+}
+
+.float-right {
+  float: right;
+}
+
+.search-wrap {
+  display: inline-block;
+  padding-top: 4px;
+  font-size: 16px;
+  color: @lightishGrey;
+  top: 4px;
+  &:hover{
+    color: @grey;
+    cursor: pointer;
+  }
+}

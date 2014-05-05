@@ -1,0 +1,21 @@
+{
+    "manifest_version": 2,
+
+    "name": "Switch Flipper",
+    "description": "Provides a simple tool for managing implementation switch states.",
+    "version": "0.1",
+
+    "permissions": [
+    "cookies", 
+    "tabs",
+    "clipboardRead", 
+    "clipboardWrite",
+    "https://*.mindbodyonline.com/",
+    "https://*.mbodev.me/",
+    "http://*.mbodev.me/"
+    ],
+    "browser_action":{
+        "default_icon": "images/hammer.png",
+        "default_popup": "popup.html"
+    }
+}
