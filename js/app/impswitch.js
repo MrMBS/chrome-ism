@@ -1,8 +1,5 @@
 define(['Backbone'], function (Backbone) {
   var self = {};
 
-  self.ImpSwitch = Backbone.Model.extend({
-  });
-
-  return self;
+  return Backbone.Model.extend(self);
 });

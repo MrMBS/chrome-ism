@@ -1,5 +1,8 @@
+
 <ul class="switch-list ul-reset">
   {{#each switches}}
-    <li class="switch-row">{{renderSwitch this ../collection}}</li>
+    <li id="switch-row-{{this.attributes.id}}" class="switch-row">
+      {{renderSwitch ../collection}}
+    </li>
   {{/each}}
 </ul>

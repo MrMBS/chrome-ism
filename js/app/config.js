@@ -7,6 +7,7 @@ define([], function () {
     settingsDevUrl: 'https://settings.mbodev.me',
     accessTokenCookie: 'access_token',
     enabledCookie: 'explicitlyEnabled',
-    disabledCookie: 'explicitlyDisabled'
+    disabledCookie: 'explicitlyDisabled',
+    switchSettingsPath: '/implementationswitch/settings'
   };
 });

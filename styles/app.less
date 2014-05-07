@@ -1,4 +1,5 @@
 @import "normalize";
+@import "animate.css";
 @import "glyphicons";
 @import url(http://fonts.googleapis.com/css?family=Raleway:900,400);
 
@@ -18,8 +19,22 @@
 @enabled: lighten(@exp-enabled, 20%);
 @disabled: lighten(@exp-disabled, 20%);
 
-::-webkit-scrollbar{
-  display: none;
+::-webkit-scrollbar {
+    width: 6px;
+}
+ 
+::-webkit-scrollbar-track {
+    background-color: @lightishGrey;
+    border-radius: 10px;
+}
+ 
+::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background-color: @grey;
+}
+
+[tabindex] {
+   outline: none !important;
 }
 
 * {
@@ -35,6 +50,7 @@ body {
 .main-wrap {
   width: 350px;
   height: auto;
+  background-color: @lightGrey;
 }
 
 .main-header {
@@ -64,18 +80,79 @@ body {
 }
 
 .header-bar {
+  position: relative;
   display: flex;
   height: 4px;
-  margin-bottom: 8px;
+  margin-bottom: 0;
+  transition: height 0.5s ease;
   div { height: auto; flex-grow: 1; width: auto; }
-  .magenta { background-color: @magenta; }
-  .orange { background-color: @orange; }
-  .cyan { background-color: @cyan; }
-  .turquois { background-color: @turquois; }
+
+  .main(@bgColor){
+    background-color: @bgColor; 
+    transition: background-color 0.5s ease;
+  }
+
+  .aux(@bgColor){
+     background-color: @bgColor; 
+     transition: background-color 0.5s ease; 
+     max-width: 200px; 
+     transition: max-width 0.5s ease;
+  }
+
+  .orange { .aux(@orange); }
+  .magenta { .aux(@magenta); }
+  .cyan { .aux(@cyan); }
+  .turquois { .main(@turquois); }
+  .search-wrap {
+    height: 0px;
+    overflow: hidden;
+    position: absolute;
+    top: 4px;
+    padding-left: 4px;
+    padding-right: 20px;
+    font-size: 16px;
+    color: fadeout(#fff, 80%);
+    transition: height 500ms ease;
+    input
+    {
+      height: 18px;
+      width: 303px;
+      padding: 0;
+      padding-left: 2px;
+      margin: 0;
+      outline: none;
+      border: none;
+      color: #000;
+      opacity: 0.6;
+      background-color: rgba(256,256,256,0.5);
+      font-family: 'Raleway',sans-serif;
+      -webkit-appearance: none;
+    }
+  }
+  &.expand {
+    height: 26px;
+    .search-wrap {
+      height: 18px;
+    }
+
+    .main(@bgColor){
+      background-color: fadeout(@bgColor, 40%);
+    }
+
+    .aux(@bgColor){
+      max-width: 0px; 
+      background-color: fadeout(@bgColor, 40%); 
+    }
+
+    .orange { .aux(@orange); }
+    .magenta { .aux(@magenta); }
+    .cyan { .aux(@cyan); }
+    .turquois { .main(@turquois); }
+  }
 }
 
 .content {
-  background: @lightGrey;
+  background-color: @lightGrey;
   border-radius: 5px;
 }
 
@@ -103,11 +180,28 @@ body {
   list-style-type: none;
 }
 
+@-webkit-keyframes row-highlighter {
+  0%, 100% {
+    color: #666;
+  }
+  5% {
+    color: #fff;
+  }
+}
+
+.animated.row-highlighter {
+  -webkit-animation-name: row-highlighter;
+  animation-name: row-highlighter;
+}
+
 .row-flex {
   display: flex;
   margin: 4px;
   border-radius: 5px;
   background-color: @lightishGrey;
+  &:focus{
+    background-color: @lightGrey;
+  }
 }
 
 .switch-name {
@@ -128,15 +222,15 @@ body {
   background-color: @grey + #222;
   .enabled & {
     background-color: @enabled;
+    .overridden& {
+      background-color: @exp-disabled;
+    }
   }
   .disabled &{
     background-color: @disabled;
-  }
-  .exp-enabled &{
-    background-color: @exp-enabled;
-  }
-  .exp-disabled &{
-    background-color: @exp-disabled;
+    .overridden& {
+      background-color: @exp-enabled;
+    }
   }
 }
 
@@ -150,15 +244,15 @@ body {
   color: @grey + #111;
   .enabled & {
     color: @enabled;
+    .overridden& {
+      color: @exp-disabled;
+    }
   }
   .disabled &{
     color: @disabled;
-  }
-  .exp-enabled &{
-    color: @exp-enabled;
-  }
-  .exp-disabled &{
-    color: @exp-disabled;
+    .overridden& {
+      color: @exp-enabled;
+    }
   }
 }
 
@@ -175,16 +269,4 @@ body {
 
 .float-right {
   float: right;
-}
-
-.search-wrap {
-  display: inline-block;
-  padding-top: 4px;
-  font-size: 16px;
-  color: @lightishGrey;
-  top: 4px;
-  &:hover{
-    color: @grey;
-    cursor: pointer;
-  }
 }

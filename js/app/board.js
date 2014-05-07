@@ -1,17 +1,20 @@
-define(['app/switches'], function (switches) {
-  var row = (function () {
-    var self = this;
-    self.tagName = 'div';
-    self.events = {};
+define(['backbone','underscore'], function (Backbone,_) {
+  var board = (function () {
+    var result = {};
+    result.tagName = 'div';
 
-    self.render = function () {
-      this.$el.html(ism.templates.board({
-        switches:switches.models, 
-        collection: self
-      }));
+    result.render = function (sorter) {
+      var self = this;
+      _.delay(function () {
+        var html = ism.templates.board({
+          switches: sorter.sort(self.collection.models), 
+          collection: self.collection
+        });
+        $(self.el).html(html);
+      },0);
     };
-    return self;
+    return result;
   })();
 
-  return Backbone.View.extend(row);
+  return Backbone.View.extend(board);
 });

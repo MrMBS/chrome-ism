@@ -8,6 +8,7 @@
     "permissions": [
     "cookies", 
     "tabs",
+    "storage",
     "clipboardRead", 
     "clipboardWrite",
     "https://*.mindbodyonline.com/",

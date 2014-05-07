@@ -1,8 +1,8 @@
-define(['underscore'], function (_) {
+define(['underscore','app/errors'], function (_,errors) {
   var self = {};
 
-  self.subdomainMapping = {
-    'modernization': 5
+  self.projectNameMapping = {
+    'Modernization': 5
   };
 
   deploymentPhases = {
@@ -18,40 +18,61 @@ define(['underscore'], function (_) {
     removedFromSettingsApi:         1000
   };
 
-  self.clientsHandler = function (impSwitch,url) {
+  self.clientsHandler = function (impSwitch,url,settings) {
     return impSwitch.deploymentPhaseId >= 
       deploymentPhases.enabledOnClients;
   };
 
-  self.previewHandler = function (impSwitch,url) {
+  self.previewHandler = function (impSwitch,url,settings) {
 
   };
 
-  self.devLocalHandler = function (impSwitch,url) {
-
-  };
-
-  self.devHandler = function (impSwitch,url) {
+  self.devHandler = function (impSwitch) {
     var subdomain = /dev-(\w+)\./i.exec(url)[1].toLowerCase();
     return impSwitch.deploymentPhaseId >= 
       deploymentPhases.codeDeployedToPreview ||
-      -~impSwitch.projectIds.indexOf(self.subdomainMapping[subdomain]);
+      -~impSwitch.projectIds.indexOf(self.projectNameMapping[subdomain]);
   };
 
-  self.defaultHandler = self.clientsHandler;
+  var buildClientsHandler = function (settings,projects) {
+    return function (impSwitch) {
+      return impSwitch.deploymentPhaseId >= 
+        deploymentPhases.enabledOnClients;
+    };
+  };
 
-  self.domainHandlers = [
-    {regex: /clients\.mindbodyonline\.com/i, handler: self.clientsHandler},
-    {regex: /preview\.mindbodyonline\.com/i, handler: self.previewHandler},
-    {regex: /dev-local\.mbodev\.me/i, handler: self.devLocalHandler},
-    {regex: /dev-\w+\.mbodev\.me/i, handler: self.devHandler}
-  ];
+  var buildPreviewHandler = function (settings,projects) {
+    return function (impSwitch) {
+      return impSwitch.deploymentPhaseId >= 
+        deploymentPhases.codeDeployedToClients;
+    };
+  };
 
-  self.getFromUrl = function (url) {
-    var match = _(self.domainHandlers).find(function (dHndlr) {
-      return dHndlr.regex.test(url);
+  var buildDevHandler = function (settings,projects) {
+    var projectsMap = {};
+    _(projects).each(function (project) {
+      projectsMap[project.name] = project.id;
     });
-    return (match && match.handler) || self.defaultHandler;
+    var projectIds = _(settings.projectNames).map(function (name) {
+      return projectsMap[name];
+    });
+    return function (impSwitch) {
+      return impSwitch.deploymentPhaseId >= 
+        deploymentPhases.codeDeployedToPreview ||
+        _(impSwitch.projectIds).intersection(projectIds).length;
+    };
+  };
+
+  self.get = function (settings,projects) {
+    switch(settings.serverRole){
+      case 1:
+        return buildDevHandler(settings,projects);
+      case 2:
+        return buildPreviewHandler(settings,projects);
+      case 3:
+        return buildClientsHandler(settings,projects);
+    }
+    throw new Error(errors.invalidServerRole);
   };
 
   return self;

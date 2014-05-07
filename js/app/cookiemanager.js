@@ -27,7 +27,7 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
       _(disabled).each(function (switchName) {
         map[switchName] = false;
       });
-      callback(map);
+      callback && callback(map);
     });
   };
 
@@ -69,7 +69,7 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
       ], 
       function (err,results) {
         if (err) throw err;
-        callback();
+        callback && callback();
       });
   };
 

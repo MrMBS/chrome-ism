@@ -7,43 +7,52 @@ require.config({
     'backbone': {
         deps: ['underscore', 'jquery'],
         exports: 'Backbone'
+    },
+    'animo': {
+      deps:['jquery']
     }
   }
 });
 
-require(['app/config','app/pagehandlers', 'app/switchrow'],
-function (config,handlers,SwitchRow) {
+require(['app/config',
+  'app/pagehandlers',
+  'app/switchrow',
+  'app/switchlist',
+  'app/board',
+  'app/urlparser',
+  'app/switchsorters',
+  'app/changehistory',
+  'app/mousetrapbindings',
+  ],
+function (config,
+  handlers,
+  SwitchRow,
+  SwitchList,
+  Board,
+  parseUrl,
+  switchSorters,
+  ChangeHistory,
+  mousetraps) {
 $(function () {
 
   Handlebars.registerHelper('indicator', function () {
     var classes = '';
-    // temp: mock explicit enabling
-    var random = Math.floor(Math.random() * 9) - 6;
-    switch (random) {
-      case 1:
-        classes += 'exp-enabled';
-        break;
-      case 2:
-        classes += 'exp-disabled';
-        break;
-    }
+    if (this.overridden) classes += 'overridden';
     if (this.enabled === null) return classes;
     return (classes += (this.enabled ? ' enabled' : ' disabled'));
   });
 
-  Handlebars.registerHelper('renderSwitch', function (model,collection) {
-    return new SwitchRow({model:model,collection:collection}).render();
+  Handlebars.registerHelper('renderSwitch', function (collection) {
+    var self = this;
+    _.delay(function () {
+        new SwitchRow({
+        model:self,
+        collection:collection,
+        id:'switch-row-' + self.id
+      }).render();
+    }, 0);
+    return '';
   });
-
-  var deploymentData = [];
-  ism.switches = {
-    byId: {},
-    byName: {}
-  };
-
-  var getSwitchCookies = function (callback) {
-    // body...
-  };
 
   var getToken = function (callback) {
     var authTokenQuery = {
@@ -55,20 +64,13 @@ $(function () {
     });
   };
 
-  var parseSwitches = function (switches, callback) {
-    chrome.tabs.getSelected(function (tab) {
-      var mapper = handlers.getFromUrl(tab.url);
-      _(switches).each(function (input) {
-        var output = {
-          name: input.name,
-          id: input.id,
-          enabled: mapper(input, tab.url),
-          description: input.description
-        };
-        ism.switches.byName[input.name] = output;
-        ism.switches.byId[input.id] = output;
-      });
-      callback();  
+  var getAspNetSessionId = function (url,callback) {
+    var sessionIdQuery = {
+      url: url,
+      name: 'ASP.NET_SessionId'
+    };
+    chrome.cookies.get(sessionIdQuery, function (cookie) {
+      callback(cookie && cookie.value);
     });
   };
 
@@ -83,16 +85,32 @@ $(function () {
     });
   };
 
-  var toggleSwitch = function () {
-    var $row = $(this).closest('.switch-row');
-    if ($row.hasClass('exp-enabled') || $row.hasClass('exp-disabled')){
-      $row.removeClass('exp-enabled');
-      $row.removeClass('exp-disabled');
-    } else if ($row.hasClass('enabled')) {
-      $row.addClass('exp-disabled');
-    } else if ($row.hasClass('disabled')){
-      $row.addClass('exp-enabled');
-    }
+  var getSwitchSettingsUrl = function (tabUrl) {
+    var parsed = parseUrl(tabUrl);
+    return parsed.protocol + '//' + 
+      parsed.host + 
+      config.switchSettingsPath;
+  };
+
+  var buildView = function (tab,deploymentData,switchSettings,projects) {
+    var pageHandler = handlers.get(switchSettings,projects);
+    var switchList = new SwitchList({
+        pageHandler: pageHandler,
+        switches: deploymentData.implementationSwitches,
+        url:tab.url
+      });
+    var changeHistory = new ChangeHistory(switchList);
+    switchSorters.get(switchSettings,projects,changeHistory,
+      function (sorter) {
+      window.switchList = switchList;
+      switchList.sync('read');
+      var board = new Board({
+        collection: switchList, 
+        el:$('#switch-board')
+      });
+      window.board = board;
+      board.render(sorter);
+    });
   };
 
   var showSwitches = function (token) {
@@ -100,15 +118,24 @@ $(function () {
       url: 'https://deployment.mindbodyonline.com' + 
       '/api/implementationswitch',
       headers: {'Authorization': 'Bearer ' + token}
-    }).done(function(data){
-      deploymentData = data;
-      parseSwitches(data.implementationSwitches, function () {
-        var switchArray = _(ism.switches.byId).toArray();
-        var html = ism.templates.board({
-          switches: switchArray
+    }).done(function(deploymentData){
+      $.ajax({
+        url: 'https://deployment.mindbodyonline.com' + 
+        '/api/project',
+        headers: {'Authorization': 'Bearer ' + token}
+      }).done(function(projects){
+        chrome.tabs.getSelected(function (tab) {
+          $.post(getSwitchSettingsUrl(tab.url)).done(function(switchSettings){
+            buildView(tab,deploymentData,switchSettings,projects);
+          }).fail(function () {
+            var switchSettings = {
+              serverRole: 3,
+              projectNames: []
+            };
+            var projects = [];
+            buildView(tab,deploymentData,switchSettings,projects);
+          });
         });
-        $('.content').html(html);
-        $('.status-flipper').on('click', toggleSwitch);
       });
     });
   };
@@ -121,5 +148,6 @@ $(function () {
   };
 
   getToken(getDeploymentData);
+  mousetraps.init();
 });
 });
