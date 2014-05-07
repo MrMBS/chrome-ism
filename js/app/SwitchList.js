@@ -49,18 +49,20 @@ function (Backbone, _, ImpSwitch, cookieManager, errors) {
       this.refresh();
     };
 
-    result.sync = function (method) {
+    result.sync = function (method,callback) {
       var self = this;
       switch (method) {
         case 'read':
           cookieManager.getCookieSwitchMap(function (map) {
             self.overrides = map;
             self.refresh();
+            callback();
           });
           break;
         case 'update':
           refreshOverrides.apply(self);
           cookieManager.setCookieSwitchMap(this.overrides);
+          callback();
           break;
       }
     };

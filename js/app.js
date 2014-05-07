@@ -23,6 +23,7 @@ require(['app/config',
   'app/switchsorters',
   'app/changehistory',
   'app/mousetrapbindings',
+  'app/handlebarhelpers',
   ],
 function (config,
   handlers,
@@ -32,7 +33,8 @@ function (config,
   parseUrl,
   switchSorters,
   ChangeHistory,
-  mousetraps) {
+  mousetraps,
+  helpers) {
 $(function () {
 
   Handlebars.registerHelper('indicator', function () {
@@ -40,18 +42,6 @@ $(function () {
     if (this.overridden) classes += 'overridden';
     if (this.enabled === null) return classes;
     return (classes += (this.enabled ? ' enabled' : ' disabled'));
-  });
-
-  Handlebars.registerHelper('renderSwitch', function (collection) {
-    var self = this;
-    _.delay(function () {
-        new SwitchRow({
-        model:self,
-        collection:collection,
-        id:'switch-row-' + self.id
-      }).render();
-    }, 0);
-    return '';
   });
 
   var getToken = function (callback) {
@@ -103,13 +93,15 @@ $(function () {
     switchSorters.get(switchSettings,projects,changeHistory,
       function (sorter) {
       window.switchList = switchList;
-      switchList.sync('read');
-      var board = new Board({
-        collection: switchList, 
-        el:$('#switch-board')
+      switchList.sync('read', function () {
+        var board = new Board({
+          collection: switchList, 
+          el:$('#switch-board')
+        });
+        window.board = board;
+        var html = board.render(sorter);
+        $(board.el).html(html);
       });
-      window.board = board;
-      board.render(sorter);
     });
   };
 
@@ -147,7 +139,8 @@ $(function () {
       showSwitches(token);
   };
 
-  getToken(getDeploymentData);
   mousetraps.init();
+  helpers.init(Handlebars);
+  getToken(getDeploymentData);
 });
 });
