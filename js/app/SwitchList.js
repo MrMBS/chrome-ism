@@ -11,7 +11,7 @@ function (Backbone, _, ImpSwitch, cookieManager, errors) {
     result.refresh = function () {
       var self = this;
       var models = _(self.switches).map(function (impSwitch) {
-        var enabled = self.pageHandler(impSwitch,self.url);
+        var enabled = self.pageHandler(impSwitch);
         var overridden = self.overrides.hasOwnProperty(impSwitch.name) &&
           (!self.overrides[impSwitch.name]) != (!enabled);
         return {
@@ -56,13 +56,13 @@ function (Backbone, _, ImpSwitch, cookieManager, errors) {
           cookieManager.getCookieSwitchMap(function (map) {
             self.overrides = map;
             self.refresh();
-            callback();
+            callback && callback();
           });
           break;
         case 'update':
           refreshOverrides.apply(self);
           cookieManager.setCookieSwitchMap(this.overrides);
-          callback();
+          callback && callback();
           break;
       }
     };
@@ -70,7 +70,6 @@ function (Backbone, _, ImpSwitch, cookieManager, errors) {
     result.initialize = function (options) {
       this.pageHandler = options.pageHandler;
       this.switches = options.switches;
-      this.url = options.url;
     };
 
     return result;

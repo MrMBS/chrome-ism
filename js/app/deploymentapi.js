@@ -16,7 +16,7 @@ define(['app/config'], function (config) {
     },
     getSwitchData: function (callback) {
       $.ajax({
-        url: 'https://deployment.mindbodyonline.com' + 
+        url: config.deploymentUrl + 
         '/api/implementationswitch',
         headers: {'Authorization': 'Bearer ' + api.token},
         success: function (data) {
@@ -29,7 +29,7 @@ define(['app/config'], function (config) {
     },
     getProjectMappings: function (callback) {
       $.ajax({
-        url: 'https://deployment.mindbodyonline.com' + 
+        url: config.deploymentUrl + 
         '/api/project',
         headers: {'Authorization': 'Bearer ' + api.token},
         success: function (data) {

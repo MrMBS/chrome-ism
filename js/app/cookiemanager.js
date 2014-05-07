@@ -2,6 +2,17 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
   var self = {};
   var switchMap = {};
 
+  var tryParse = function (cookie) {
+    if (!cookie || !cookie.value) return [];
+    try{
+      return JSON.parse(decodeURIComponent(cookie.value));
+    }
+    catch (e){
+      console.error('Parser error:', e);
+      return [];
+    }
+  };
+
   self.getCookieSwitchMap = function (callback) {
     var query = {
       url: config.settingsDevUrl
@@ -17,8 +28,8 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
         // break if we've found both
         return !(cookieSet.enabled && cookieSet.disabled);
       });
-      var enabled = JSON.parse(decodeURIComponent(cookieSet.enabled.value));
-      var disabled = JSON.parse(decodeURIComponent(cookieSet.disabled.value));
+      var enabled = tryParse(cookieSet.enabled);
+      var disabled = tryParse(cookieSet.disabled);
 
       var map = {};
       _(enabled).each(function (switchName) {
@@ -44,7 +55,7 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
 
   var buildSetDetails = function (switches,enabled,mbodev) {
     var url = mbodev ? config.settingsDevUrl : config.deploymentUrl;
-    var domain = mbodev ? config.devDomain : config.deploymentDomain;
+    var domain = mbodev ? config.devDomain : undefined;
     var name = enabled ? 'explicitlyEnabled' : 'explicitlyDisabled';
     var value = encodeURIComponent(JSON.stringify(switches));
     return {url: url, domain: domain, name: name, value: value};

@@ -1,9 +1,9 @@
 define([], function () {
   return {
-    prodDomain: 'mindbodyonline.com',
+    prodDomain: 'mbodev.me',
     devDomain: 'mbodev.me',
-    deploymentUrl: 'https://deployment.mindbodyonline.com',
-    deploymentDomain: 'deployment.mindbodyonline.com',
+    deploymentUrl: 'https://deployment-local.mbodev.me',
+    deploymentDomain: 'deployment-local.mbodev.me',
     settingsDevUrl: 'https://settings.mbodev.me',
     accessTokenCookie: 'access_token',
     enabledCookie: 'explicitlyEnabled',

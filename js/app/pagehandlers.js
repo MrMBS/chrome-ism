@@ -17,23 +17,7 @@ define(['underscore','app/errors'], function (_,errors) {
     cleanedUp:                      900,
     removedFromSettingsApi:         1000
   };
-
-  self.clientsHandler = function (impSwitch,url,settings) {
-    return impSwitch.deploymentPhaseId >= 
-      deploymentPhases.enabledOnClients;
-  };
-
-  self.previewHandler = function (impSwitch,url,settings) {
-
-  };
-
-  self.devHandler = function (impSwitch) {
-    var subdomain = /dev-(\w+)\./i.exec(url)[1].toLowerCase();
-    return impSwitch.deploymentPhaseId >= 
-      deploymentPhases.codeDeployedToPreview ||
-      -~impSwitch.projectIds.indexOf(self.projectNameMapping[subdomain]);
-  };
-
+  
   var buildClientsHandler = function (settings,projects) {
     return function (impSwitch) {
       return impSwitch.deploymentPhaseId >= 

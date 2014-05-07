@@ -1,23 +1,23 @@
-define(['backbone','app/search'], function (Backbone,search) {
+define(['backbone','underscore','app/search'], function (Backbone,_,search) {
   var row = (function () {
     var result = {};
-    result.tagName = 'li';
-    result.className = 'switch-row';
     result.events = {
-      'click .status-flipper': 'toggleOverride',
-    };
+      'click .status-flipper': 'toggleOverride'
+    },
 
     result.toggleOverride = function () {
       var overridden = this.model.get('overridden');
       this.model.set('overridden',!overridden);
       this.collection.sync('update');
-      $(this.el).find('.row-flex').toggleClass('overridden');
+      var $flex = $(this.el).find('.row-flex');
+      $flex.toggleClass('overridden');
     };
 
-    result.render = function () {
+    result.render = function ($container) {
       var self = this;
-      return ism.templates.switchrow(
-        self.model.attributes);
+      self.$el.html(ism.templates.switchrow(
+        self.model.attributes));
+      $container.append(self.$el);
     };
 
     result.initialize = function (options) {
@@ -25,11 +25,10 @@ define(['backbone','app/search'], function (Backbone,search) {
         var name = this.model.attributes
           .name.toLowerCase().replace(/[^A-Za-z0-9]/g, '');
         if (!~name.indexOf(query))
-          this.el.hide();
+          $(this.el).hide();
         else
-          this.el.show();
+          $(this.el).show();
       });
-      this.delegateEvents();
     };
 
     return result;

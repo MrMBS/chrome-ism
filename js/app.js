@@ -42,8 +42,6 @@ function (
   helpers,
   deployment) {
 $(function () {
-
-
   var showLogin = function () {
     var html = ism.templates.login();
     $('.content').html(html);
@@ -79,8 +77,7 @@ $(function () {
           el:$('#switch-board')
         });
         window.board = board;
-        var html = board.render(sorter);
-        $(board.el).html(html);
+        board.render(sorter);
       });
     });
   };
