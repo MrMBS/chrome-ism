@@ -43,12 +43,6 @@ function (
   deployment) {
 $(function () {
 
-  Handlebars.registerHelper('indicator', function () {
-    var classes = '';
-    if (this.overridden) classes += 'overridden';
-    if (this.enabled === null) return classes;
-    return (classes += (this.enabled ? ' enabled' : ' disabled'));
-  });
 
   var showLogin = function () {
     var html = ism.templates.login();
