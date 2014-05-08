@@ -42,6 +42,15 @@ module.exports = function(grunt) {
         'test/*.js'
       ]
     },
+    cafemocha: {
+      tests: {
+        src: 'test/*.js',
+        options: {
+          ui: 'tdd',
+          reporter: 'spec'     
+        },
+      }
+    },
     watch: {
       styles: {
         files: ['chrome-ism/styles/*.less'],
@@ -52,7 +61,7 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: ['Gruntfile.js','chrome-ism/js/*.js','js/app/*.js', 'test/*.js'],
-        tasks: ['jshint'],
+        tasks: ['jshint','cafemocha'],
         options: {
           nospawn: true
         }
@@ -71,11 +80,13 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-handlebars');
   grunt.loadNpmTasks('grunt-contrib-jshint');
   grunt.loadNpmTasks('grunt-contrib-watch');
+  grunt.loadNpmTasks('grunt-cafe-mocha');
 
   grunt.registerTask('default', [
     'less',
     'handlebars',
     'jshint',
+    'cafemocha',
     'watch'
   ]);
 };
