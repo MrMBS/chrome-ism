@@ -17,7 +17,8 @@ module.exports = function(grunt) {
         options: {
           namespace: 'ism.templates',
           processName: function (filePath) {
-            return filePath.replace(/(templates\/)(\w+)(\.hbs)/, '$2');
+            return filePath
+              .replace(/(chrome-ism\/templates\/)(\w+)(\.hbs)/, '$2');
           }
         },
         files: {

@@ -1,9 +1,7 @@
 define(['backbone','underscore', 'app/switchrow'], 
   function (Backbone,_,SwitchRow) {
-  var board = (function () {
-    var result = {};
-
-    result.render = function (sorter) {
+  var board = {
+    render: function (sorter) {
       var self = this;
       sorter.sort(self.collection.models);
       var html = ism.templates.board();
@@ -22,9 +20,8 @@ define(['backbone','underscore', 'app/switchrow'],
         row.render(self.$('.switch-list'));
       });
       $('#' + self.id).replaceWith(self.$el);
-    };
-    return result;
-  })();
+    }
+  };
 
   return Backbone.View.extend(board);
 });

@@ -52,6 +52,20 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
         search.focus();
       }
     });
+
+    Mousetrap.bind(['right'], function (e) {
+      e.preventDefault();
+      var $row = $('.row-flex:focus');
+      if (!$row.hasClass('overridden'))
+        $row.find('.status-flipper').trigger('click');
+    });
+
+    Mousetrap.bind(['left'], function (e) {
+      e.preventDefault();
+      var $row = $('.row-flex:focus');
+      if ($row.hasClass('overridden'))
+        $row.find('.status-flipper').trigger('click');
+    });
   };
   return {init:init};
 });
