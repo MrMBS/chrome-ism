@@ -2,7 +2,7 @@ var requirejs = require('requirejs');
 
 requirejs.config({
   nodeRequire: require,
-  baseUrl: 'js/lib',
+  baseUrl: 'chrome-ism/js/lib',
   paths: {
     app: '../app'
   }

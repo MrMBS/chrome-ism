@@ -8,7 +8,7 @@ module.exports = function(grunt) {
           optimization: 2
         },
         files: {
-          "styles/app.css": "styles/app.less"
+          "chrome-ism/styles/app.css": "chrome-ism/styles/app.less"
         }
       }
     },
@@ -21,7 +21,7 @@ module.exports = function(grunt) {
           }
         },
         files: {
-          'templates/templates.js' : ['templates/*.hbs']
+          'chrome-ism/templates/templates.js' : ['chrome-ism/templates/*.hbs']
         }
       }
     },
@@ -35,18 +35,23 @@ module.exports = function(grunt) {
         '-W030': true,
         '-W018': true
       },
-      all: ['Gruntfile.js', 'js/*.js', 'js/app/*.js', 'test/*.js']
+      all: [
+        'Gruntfile.js', 
+        'chrome-ism/js/*.js', 
+        'chrome-ism/js/app/*.js', 
+        'test/*.js'
+      ]
     },
     watch: {
       styles: {
-        files: ['styles/*.less'],
+        files: ['chrome-ism/styles/*.less'],
         tasks: ['less'],
         options: {
           nospawn: true
         }
       },
       scripts: {
-        files: ['Gruntfile.js','js/*.js','js/app/*.js', 'test/*.js'],
+        files: ['Gruntfile.js','chrome-ism/js/*.js','js/app/*.js', 'test/*.js'],
         tasks: ['jshint'],
         options: {
           nospawn: true

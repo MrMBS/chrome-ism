@@ -1,9 +1,9 @@
 {
     "manifest_version": 2,
 
-    "name": "Switch Flipper",
+    "name": "Implementation Switch Manager",
     "description": "Provides a simple tool for managing implementation switch states.",
-    "version": "0.2",
+    "version": "0.3",
 
     "permissions": [
         "cookies", 

@@ -48,8 +48,7 @@ suite('cookieManager', function () {
           value: details.value,
           domain: details.domain
         });
-      } else if (details.url === config.deploymentUrl &&
-          details.domain === config.deploymentDomain) {
+      } else if (details.url === config.deploymentUrl) {
         testState.depCookies = testState.depCookies || {};
         testState.depCookies[details.name] = details.value;
         callback.apply({},{
