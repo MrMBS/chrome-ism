@@ -1,5 +1,4 @@
-@import "normalize";
-@import "animate.css";
+@import "animate";
 @import "glyphicons";
 @import url(http://fonts.googleapis.com/css?family=Raleway:900,400);
 
@@ -42,6 +41,7 @@
 }
 
 body {
+  margin: 0;
   font-size: 12px;
   overflow: hidden;
   color: @darkGrey;
@@ -72,11 +72,6 @@ body {
   font-weight: normal;
   font-family: 'Raleway',sans-serif;
   float: right;
-}
-
-.main-header img {
-  display: block;
-  float: left;
 }
 
 .header-bar {
@@ -156,42 +151,10 @@ body {
   border-radius: 5px;
 }
 
-.content-header {
-  border-bottom: 1px solid #ddd;
-  padding-bottom: 10px;
-  margin-bottom: 10px;
-}
-
-.content h4 {
-  font-size: 14px;
-  margin: 0 0 3px 0;
-}
-
-.sub-text {
-  margin: 0;
-  font-style: italic;
-  color: #B8B8B8;
-  font-size: 11px;
-}
-
 .ul-reset {
   padding: 0;
   margin: 0;
   list-style-type: none;
-}
-
-@-webkit-keyframes row-highlighter {
-  0%, 100% {
-    color: #666;
-  }
-  5% {
-    color: #fff;
-  }
-}
-
-.animated.row-highlighter {
-  -webkit-animation-name: row-highlighter;
-  animation-name: row-highlighter;
 }
 
 .row-flex {
@@ -202,56 +165,55 @@ body {
   &:focus{
     background-color: @lightGrey;
   }
-}
 
-.switch-name {
-  color: #666;
-  font-size: 14px;
-  font-family: 'Raleway',sans-serif;
-}
-
-.switch-name-block {
-  padding: 8px;
-}
-
-.switch-status {
-  width: 4px;
-  height: auto;
-  border-top-left-radius: 5px;
-  border-bottom-left-radius: 5px;
-  background-color: @grey + #222;
-  .enabled & {
-    background-color: @enabled;
-    .overridden& {
-      background-color: @exp-disabled;
+  .switch-name-block {
+    padding: 8px;
+    .switch-name {
+      color: #666;
+      font-size: 14px;
+      font-family: 'Raleway',sans-serif;
     }
   }
-  .disabled &{
-    background-color: @disabled;
-    .overridden& {
-      background-color: @exp-enabled;
-    }
-  }
-}
 
-.status-flipper {
-  align-self: center;
-  margin-left: auto;
-  margin-right: 8px;
-  font-size: 16px;
-  opacity: 0.6;
-  &:hover{ opacity: 1.0; cursor: pointer; }
-  color: @grey + #111;
-  .enabled & {
-    color: @enabled;
-    .overridden& {
-      color: @exp-disabled;
+  .switch-status {
+    width: 4px;
+    height: auto;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    background-color: @grey + #222;
+    .enabled& {
+      background-color: @enabled;
+      .overridden& {
+        background-color: @exp-disabled;
+      }
+    }
+    .disabled&{
+      background-color: @disabled;
+      .overridden& {
+        background-color: @exp-enabled;
+      }
     }
   }
-  .disabled &{
-    color: @disabled;
-    .overridden& {
-      color: @exp-enabled;
+
+  .status-flipper {
+    align-self: center;
+    margin-left: auto;
+    margin-right: 8px;
+    font-size: 16px;
+    opacity: 0.6;
+    &:hover{ opacity: 1.0; cursor: pointer; }
+    color: @grey + #111;
+    .enabled& {
+      color: @enabled;
+      .overridden& {
+        color: @exp-disabled;
+      }
+    }
+    .disabled&{
+      color: @disabled;
+      .overridden& {
+        color: @exp-enabled;
+      }
     }
   }
 }
@@ -261,12 +223,4 @@ body {
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-
-.float-left {
-  float: left;
-}
-
-.float-right {
-  float: right;
 }
