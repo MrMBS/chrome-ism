@@ -7,6 +7,8 @@ define(['backbone','underscore'], function (Backbone,_) {
   $search.on('keyup', function () {
     var query = $(this).val().toLowerCase()
       .replace(/[^A-Za-z0-9]/g,'');
+
+    if(~query.indexOf('konami')) window.whatDoesThisDo();
     search.trigger('input', query);
   });
 

@@ -1,6 +1,8 @@
 @import "animate";
 @import "glyphicons";
 @import url(http://fonts.googleapis.com/css?family=Raleway:900,400);
+@import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono);
+@import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
 
 @grey: #999;
 @darkGrey: #333;
@@ -19,8 +21,10 @@
 @disabled: lighten(@exp-disabled, 20%);
 
 @appWidth: 350px;
+@appHeight: 600px;
 
-@raleway: 'Raleway',sans-serif;
+@sans: 'Raleway',sans-serif;
+@mono: 'Droid Sans Mono',sans-serif;
 
 ::-webkit-scrollbar {
     width: 6px;
@@ -54,13 +58,19 @@ body {
     display: block;
   }
 
-  &.logged-in .main-wrap {
-    display: block;
+  &.logged-in {
+    height: @appHeight;
+    .main-wrap {
+      display: block;
+    }
   }
 
-  &.logged-out .login {
-    display: block;
-  } 
+  &.logged-out {
+    height: auto;
+    .login {
+      display: block;
+    } 
+  }
 }
 
 .loader {
@@ -78,7 +88,7 @@ body {
   background-color: @lightishGrey;
   .logged-out-msg {
     padding: 6px;
-    font-family: @raleway;
+    font-family: @sans;
     color: @darkGrey;
   }
   .login-btn {
@@ -94,17 +104,16 @@ body {
     @btncolor: @turquois;
     border-color: darken(@btncolor, 5%);
     background: linear-gradient(@btncolor, darken(@btncolor, 5%));
-    font-family: @raleway;
+    font-family: @sans;
     color: @lightGrey;
   }
 }
 
 .main-wrap {
   display: none;
+  height: @appHeight;
+  overflow: hidden;
   width: @appWidth;
-  height: auto;
-  max-height: 600px;
-  padding-bottom: 4px;
   background-color: @lightGrey;
 }
 
@@ -119,7 +128,7 @@ body {
   margin: 2px 0 0 0;
   font-size: 18px;
   font-weight: normal;
-  font-family: @raleway;
+  font-family: @sans;
   float: right;
 }
 
@@ -169,7 +178,7 @@ body {
       color: #000;
       opacity: 0.6;
       background-color: rgba(256,256,256,0.5);
-      font-family: @raleway;
+      font-family: @mono;
       -webkit-appearance: none;
     }
   }
@@ -198,9 +207,10 @@ body {
 .content {
   background-color: @lightGrey;
   border-radius: 5px;
+  padding-top: 1px;
   padding-bottom: 5px;
 
-  max-height: 520px;
+  max-height: @appHeight - 38px;
   overflow-y: scroll;
 }
 
@@ -222,9 +232,9 @@ body {
   .switch-name-block {
     padding: 8px;
     .switch-name {
-      color: #666;
+      color: #6a6a6a;
       font-size: 14px;
-      font-family: @raleway;
+      font-family: @mono;
     }
   }
 

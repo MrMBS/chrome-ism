@@ -50,6 +50,10 @@ $(function () {
     });
   };
 
+  var showLoading = function () {
+    $('body').addClass('loading');
+  };
+
   var getSwitchSettingsUrl = function (tabUrl) {
     var parsed = parseUrl(tabUrl);
     return parsed.protocol + '//' + 
@@ -90,6 +94,7 @@ $(function () {
 
   deployment.init(function (err) {
     if (err) return showLogin();
+    showLoading();
     var tasks = [
       deployment.getSwitchData,
       deployment.getProjectMappings,
