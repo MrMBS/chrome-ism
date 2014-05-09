@@ -1,6 +1,5 @@
 @import "animate";
 @import "glyphicons";
-@import "bubbles.css";
 @import url(http://fonts.googleapis.com/css?family=Raleway:900,400);
 
 @grey: #999;
@@ -66,15 +65,11 @@ body {
 
 .loader {
   width: @appWidth;
-  height: 56px;
+  height: auto;
   overflow: hidden;
   display: none;
   background-color: @lightishGrey;
   margin: 0;
-  .bubbling {
-    margin-left: auto;
-    margin-right: auto;
-  }
 }
 
 .login {
@@ -108,6 +103,7 @@ body {
   display: none;
   width: @appWidth;
   height: auto;
+  max-height: 600px;
   padding-bottom: 4px;
   background-color: @lightGrey;
 }
@@ -203,6 +199,9 @@ body {
   background-color: @lightGrey;
   border-radius: 5px;
   padding-bottom: 5px;
+
+  max-height: 520px;
+  overflow-y: scroll;
 }
 
 .ul-reset {

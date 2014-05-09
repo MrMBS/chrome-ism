@@ -10,15 +10,6 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "\r\n<ul class=\"switch-list ul-reset\">\r\n</ul>";
   });
 
-this["ism"]["templates"]["login"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
-  this.compilerInfo = [4,'>= 1.0.0'];
-helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
-  
-
-
-  return "<div>\r\n  Whatchu tryin' to do, huh? You ain't logged in.\r\n  <button id=\"login-btn\">Login</button>\r\n</div>";
-  });
-
 this["ism"]["templates"]["switchrow"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};

@@ -35,3 +35,61 @@
   -webkit-animation-name: row-highlighter;
   animation-name: row-highlighter;
 }
+
+@firstColor: #ee4256;
+@secondColor: #fcb64b;
+@width: 270px;
+@duration: 2s;
+
+.bouncing {
+  padding: 0;
+  padding-left: 40px;
+  text-align: center;
+  width: @width;
+  height: auto;
+
+  span {
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    margin: 8px auto;
+    background: #83edb8;
+    -webkit-border-radius: 50px;
+    -webkit-animation: bouncing @duration infinite alternate;
+    border-radius: 50px;
+    animation: bubbling @duration infinite alternate;
+  }
+
+  #bouncing-1 {
+    -webkit-animation-delay: 0s;
+    animation-delay: 0s;
+  }
+
+  #bouncing-2 {
+    -webkit-animation-delay: -0.66s;
+    animation-delay: -0.66s;
+  }
+
+  #bouncing-3 {
+    -webkit-animation-delay: -1.33s;
+    animation-delay: -1.33s;
+  }
+}
+
+@-webkit-keyframes bouncing {
+  0% {
+    background-color:@firstColor;
+    -webkit-transform: translateX(-@width/2);
+  }
+
+  50% {
+    background-color:@secondColor;
+    -webkit-transform: translateX(@width/2);
+  }
+
+  100%{
+    background-color:#83edb8;
+    -webkit-transform: translateX(-@width/2);
+  }
+}
