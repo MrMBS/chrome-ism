@@ -5,26 +5,37 @@
   <link rel="stylesheet" type="text/css" href="styles/app.css">
   <script data-main="js/app" src="js/lib/require.js"></script>
 </head>
-<body class="chrome-ism">
+<body class="chrome-ism loading">
+  <section class="loader">
+    <div class="bubbling">
+      <span id="bubbling-1"></span>
+      <span id="bubbling-2"></span>
+      <span id="bubbling-3"></span>
+    </div>
+  </section>
+  <section class="login">
+    <span class="logged-out-msg">you are logged out.</span>
+    <a href="#" id="login-btn" class="login-btn">LOGIN</a>
+  </section>
   <section class="main-wrap">
-    <header class="main-header">
-      <h3>Implementation Switches</h3>
-    </header>
-    <div class="header-bar">
-      <div class="search-wrap">
-        <span class="search glyphicon glyphicon-search"></span>
-        <input id="search-field" class="mousetrap" type="text">
+    <div class="fixed-top">
+      <header class="main-header">
+        <h3>Implementation Switches</h3>
+      </header>
+      <div class="header-bar">
+        <div class="search-wrap">
+          <span class="search glyphicon glyphicon-search"></span>
+          <input id="search-field" class="mousetrap" type="text">
+        </div>
+        <div class="orange"></div>
+        <div class="magenta"></div>
+        <div class="turquois"></div>
+        <div class="cyan"></div>
       </div>
-      <div class="orange"></div>
-      <div class="magenta"></div>
-      <div class="turquois"></div>
-      <div class="cyan"></div>
     </div>
     <div id="switch-board" class="content">
       <!-- see board.hbs -->
     </div>
-    <footer class="main-footer">
-    </footer>
   </section>
 
   <script type="text/javascript" src="js/lib/jquery-2.1.0.min.js"></script>

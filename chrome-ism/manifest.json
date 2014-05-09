@@ -18,5 +18,15 @@
     "browser_action":{
         "default_icon": "images/hammer.png",
         "default_popup": "popup.html"
+    },
+    "commands": {
+      "_execute_browser_action": {
+        "suggested_key": {
+          "windows": "Ctrl+I",
+          "mac": "Command+I",
+          "chromeos": "Ctrl+I",
+          "linux": "Ctrl+I"
+        }
+      }
     }
 }

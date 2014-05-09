@@ -1,5 +1,6 @@
 @import "animate";
 @import "glyphicons";
+@import "bubbles.css";
 @import url(http://fonts.googleapis.com/css?family=Raleway:900,400);
 
 @grey: #999;
@@ -18,6 +19,10 @@
 @enabled: lighten(@exp-enabled, 20%);
 @disabled: lighten(@exp-disabled, 20%);
 
+@appWidth: 350px;
+
+@raleway: 'Raleway',sans-serif;
+
 ::-webkit-scrollbar {
     width: 6px;
 }
@@ -32,33 +37,85 @@
     background-color: @grey;
 }
 
+*::selection {
+  background: @orange;
+}
+
 [tabindex] {
    outline: none !important;
 }
 
 body {
+  background-color: @lightishGrey;
   margin: 0;
   font-size: 12px;
   overflow: hidden;
   color: @darkGrey;
+  &.loading .loader {
+    display: block;
+  }
+
+  &.logged-in .main-wrap {
+    display: block;
+  }
+
+  &.logged-out .login {
+    display: block;
+  } 
+}
+
+.loader {
+  width: @appWidth;
+  height: 56px;
+  overflow: hidden;
+  display: none;
+  background-color: @lightishGrey;
+  margin: 0;
+  .bubbling {
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.login {
+  width: 228px;
+  display: none;
+  background-color: @lightishGrey;
+  .logged-out-msg {
+    padding: 6px;
+    font-family: @raleway;
+    color: @darkGrey;
+  }
+  .login-btn {
+    display: inline-block;
+    width: 75px;
+    padding: 5px 10px 5px 10px;
+    margin: 4px;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    text-align: center;
+    text-decoration: none;
+    @btncolor: @turquois;
+    border-color: darken(@btncolor, 5%);
+    background: linear-gradient(@btncolor, darken(@btncolor, 5%));
+    font-family: @raleway;
+    color: @lightGrey;
+  }
 }
 
 .main-wrap {
-  width: 350px;
+  display: none;
+  width: @appWidth;
   height: auto;
+  padding-bottom: 4px;
   background-color: @lightGrey;
 }
 
 .main-header {
   color: @darkGrey;
-  background: @lightGrey;
+  background: @lightishGrey;
   overflow: hidden; 
-  padding: 5px;
-}
-
-.main-footer {
-  margin-top: 15px;
-  background: @lightGrey;
   padding: 5px;
 }
 
@@ -66,7 +123,7 @@ body {
   margin: 2px 0 0 0;
   font-size: 18px;
   font-weight: normal;
-  font-family: 'Raleway',sans-serif;
+  font-family: @raleway;
   float: right;
 }
 
@@ -116,7 +173,7 @@ body {
       color: #000;
       opacity: 0.6;
       background-color: rgba(256,256,256,0.5);
-      font-family: 'Raleway',sans-serif;
+      font-family: @raleway;
       -webkit-appearance: none;
     }
   }
@@ -145,6 +202,7 @@ body {
 .content {
   background-color: @lightGrey;
   border-radius: 5px;
+  padding-bottom: 5px;
 }
 
 .ul-reset {
@@ -167,7 +225,7 @@ body {
     .switch-name {
       color: #666;
       font-size: 14px;
-      font-family: 'Raleway',sans-serif;
+      font-family: @raleway;
     }
   }
 
@@ -212,6 +270,10 @@ body {
       }
     }
   }
+}
+
+.hide {
+  display: none;
 }
 
 .truncate {

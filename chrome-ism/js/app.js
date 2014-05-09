@@ -43,13 +43,10 @@ function (
   deployment) {
 $(function () {
   var showLogin = function () {
-    var html = ism.templates.login();
-    $('.content').html(html);
-    $('#login-btn').on('click', function () {
-      chrome.tabs.create({
-        url: config.deploymentUrl,
-        active: true
-      });
+    $('body').addClass('logged-out');
+    $('body').removeClass('loading');
+    $('a.login-btn').on('click', function (e) {
+      chrome.tabs.create({url: config.deploymentUrl});
     });
   };
 
@@ -70,15 +67,21 @@ $(function () {
     var changeHistory = new ChangeHistory(switchList);
     switchSorters.get(switchSettings,projects,changeHistory,
       function (sorter) {
-      window.switchList = switchList;
       switchList.sync('read', function () {
         var board = new Board({
           collection: switchList, 
           el:$('#switch-board')
         });
-        window.board = board;
         board.render(sorter);
+        $('body').addClass('logged-in');
+        $('body').removeClass('loading');
       });
+    });
+  };
+
+  var getCurrentTab = function (callback) {
+    chrome.tabs.getSelected(function (tab) {
+      callback(null,tab);
     });
   };
 
@@ -89,27 +92,26 @@ $(function () {
     if (err) return showLogin();
     var tasks = [
       deployment.getSwitchData,
-      deployment.getProjectMappings
+      deployment.getProjectMappings,
+      getCurrentTab
     ];
     async.parallel(tasks, function (err,results) {
       if (err === 401) return showLogin();
       else if (err) throw err;
       var switchData = results[0];
       var projects = results[1];
-      chrome.tabs.getSelected(function (tab) {
-        $.post(getSwitchSettingsUrl(tab.url)).done(function(switchSettings){
-          buildView(tab,switchData,switchSettings,projects);
-        }).fail(function () {
-          var switchSettings = {
-            serverRole: 3,
-            projectNames: []
-          };
-          var projects = [];
-          buildView(tab,switchData,switchSettings,projects);
-        });
+      var tab = results[2];
+      $.post(getSwitchSettingsUrl(tab.url)).done(function(switchSettings){
+        buildView(tab,switchData,switchSettings,projects);
+      }).fail(function () {
+        var switchSettings = {
+          serverRole: 3,
+          projectNames: []
+        };
+        var projects = [];
+        buildView(tab,switchData,switchSettings,projects);
       });
     });
   });
-
 });
 });
