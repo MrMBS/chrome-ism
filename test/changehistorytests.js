@@ -1,7 +1,7 @@
 // for chai syntax:
 /* jshint expr: true */
 var expect = require('chai').expect;
-suite('ChangeHistory', function () {
+describe('ChangeHistory', function () {
   var ChangeHistory;
   var config;
   var Backbone;
@@ -9,7 +9,7 @@ suite('ChangeHistory', function () {
   chrome = {};
   var testState = {};
 
-  setup(function (done) {
+  beforeEach(function (done) {
     require('../testsetup').setup(['app/changehistory', 
       'app/config', 'Backbone', 'underscore'], 
       function (chHist, conf, bb, under) {
@@ -45,8 +45,8 @@ suite('ChangeHistory', function () {
     };
   };
 
-  suite('switchlist->update:overrides', function () {
-    test('should log the update in chrome storage', function (done) {
+  describe('switchlist->update:overrides', function () {
+    it('should log the update in chrome storage', function (done) {
       mockChromeStorage();
       var switchlist = {};
       _(switchlist).extend(Backbone.Events);
@@ -63,8 +63,8 @@ suite('ChangeHistory', function () {
     });
   });
 
-  suite('#getRecent', function () {
-    test('should get the last n changes', function (done) {
+  describe('#getRecent', function () {
+    it('should get the last n changes', function (done) {
       mockChromeStorage();
       var switchlist = {};
       _(switchlist).extend(Backbone.Events);

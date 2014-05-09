@@ -1,13 +1,13 @@
 // for chai syntax:
 /* jshint expr: true */
 var expect = require('chai').expect;
-suite('cookieManager', function () {
+describe('cookieManager', function () {
   var cookieManager;
   var config;
 
   var testState = {};
 
-  setup(function (done) {
+  beforeEach(function (done) {
     require('../testsetup').setup(['app/cookiemanager', 'app/config'], 
       function (parser, conf) {
       cookieManager = parser;
@@ -60,8 +60,8 @@ suite('cookieManager', function () {
     };
   };
 
-  suite('.getAccessToken', function () {
-    test('should get an access token', function (done) {
+  describe('.getAccessToken', function () {
+    it('should get an access token', function (done) {
       chrome = {};
       chrome.cookies = {};
       chrome.cookies.get = function (query,callback) {
@@ -74,8 +74,8 @@ suite('cookieManager', function () {
     });
   });
 
-  suite('.getCookieSwitchMap', function () {
-    test('should get single enabled cookie', function (done) {
+  describe('.getCookieSwitchMap', function () {
+    it('should get single enabled cookie', function (done) {
       var switchName = 'testSwitchName';
       var encoded = '%5B%22testSwitchName%22%5D';
       mockCookieApiGet(encoded,true);
@@ -85,7 +85,7 @@ suite('cookieManager', function () {
       });
     });
 
-    test('should get single disabled cookie', function (done) {
+    it('should get single disabled cookie', function (done) {
       var switchName = 'testSwitchName';
       var encoded = '%5B%22testSwitchName%22%5D';
       mockCookieApiGet(encoded,false);
@@ -96,7 +96,7 @@ suite('cookieManager', function () {
     });
 
 
-    test('should handle multiple switches', function (done) {
+    it('should handle multiple switches', function (done) {
       var first = 'first';
       var second = 'second';
       var encoded = '%5B%22first%22%2C%22second%22%5D';
@@ -109,8 +109,8 @@ suite('cookieManager', function () {
     });
   });
 
-  suite('.setCookieSwitchMap', function () {
-    test('should set enabled cookie for single', function (done) {
+  describe('.setCookieSwitchMap', function () {
+    it('should set enabled cookie for single', function (done) {
       var switchName = 'testSwitchName';
       var encoded = '%5B%22testSwitchName%22%5D';
       var emptyEncoded = '%5b%5d';
@@ -125,7 +125,7 @@ suite('cookieManager', function () {
       });
     });
 
-    test('should set disabled cookie for single', function (done) {
+    it('should set disabled cookie for single', function (done) {
       var switchName = 'testSwitchName';
       var encoded = '%5B%22testSwitchName%22%5D';
       var emptyEncoded = '%5b%5d';
@@ -140,7 +140,7 @@ suite('cookieManager', function () {
       });
     });
 
-    test('should handle multiple switches', function (done) {
+    it('should handle multiple switches', function (done) {
       var first = 'first';
       var second = 'second';
       var encoded = '%5B%22first%22%2C%22second%22%5D';
@@ -156,7 +156,7 @@ suite('cookieManager', function () {
       });
     });
 
-    test('should handle empty switches', function (done) {
+    it('should handle empty switches', function (done) {
       var emptyEncoded = '%5B%5D';
 
       mockCookieApiSet();

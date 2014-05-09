@@ -1,14 +1,14 @@
 // for chai syntax:
 /* jshint expr: true */
 var expect = require('chai').expect;
-suite('switchSorters', function () {
+describe('switchSorters', function () {
   var sorters;
   var config;
   var changeHistory;
 
   var testState = {};
 
-  setup(function (done) {
+  beforeEach(function (done) {
     require('../testsetup').setup(['app/switchsorters', 
       'app/config', 'app/changeHistory'], 
       function (sorts, conf, ChangeHistory) {
@@ -46,8 +46,8 @@ suite('switchSorters', function () {
     };
   };
 
-  suite('get', function () {
-    test('should sort by project ids', function (done) {
+  describe('get', function () {
+    it('should sort by project ids', function (done) {
       var settings = {
         projectNames:['Five','Two']
       };
@@ -74,7 +74,7 @@ suite('switchSorters', function () {
       });
     });
 
-    test('should sort alphabetically', function (done) {
+    it('should sort alphabetically', function (done) {
       var settings = {
         projectNames:[]
       };
@@ -99,7 +99,7 @@ suite('switchSorters', function () {
       });
     });
 
-    test('should sort by last activity', function (done) {
+    it('should sort by last activity', function (done) {
       var settings = {
         projectNames:[]
       };

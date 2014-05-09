@@ -1,17 +1,17 @@
 // for chai syntax:
 /* jshint expr: true */
 var expect = require('chai').expect;
-suite('handlers', function () {
+describe('handlers', function () {
   var handlers;
-  setup(function (done) {
+  beforeEach(function (done) {
     require('../testsetup').setup(['app/pagehandlers'], function (hndlrs) {
       handlers = hndlrs;
       done();
     });
   });
 
-  suite('.get -> mbodev handler', function () {
-    test('should correctly map the project name', function () {
+  describe('.get -> mbodev handler', function () {
+    it('should correctly map the project name', function () {
       var settings = {
         serverRole:1,
         projectNames:['Five']
@@ -28,8 +28,8 @@ suite('handlers', function () {
     });
   });
 
-  suite('.get -> preview handler', function () {
-    test('should correctly filter off deploymentPhaseId', function () {
+  describe('.get -> preview handler', function () {
+    it('should correctly filter off deploymentPhaseId', function () {
       var settings = {
         serverRole:2,
       };
@@ -41,8 +41,8 @@ suite('handlers', function () {
     });
   });
 
-  suite('.get -> clients handler', function () {
-    test('should correctly filter off deploymentPhaseId', function () {
+  describe('.get -> clients handler', function () {
+    it('should correctly filter off deploymentPhaseId', function () {
       var settings = {
         serverRole:3,
       };
