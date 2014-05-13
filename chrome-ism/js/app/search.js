@@ -26,7 +26,8 @@ define(['backbone','underscore'], function (Backbone,_) {
   };
 
   $search.on('focusout', function () {
-    $('.header-bar').removeClass('expand');
+    if (!$(this).val().length)
+      $('.header-bar').removeClass('expand');
   });
 
   return search;

@@ -28,7 +28,6 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     Mousetrap.bind(['down'], function (e) {
       e.preventDefault();
       var $focus = $('.row-flex:visible:focus');
-      window.last = $focus;
       if ($focus.length){
         $focus.closest('.switch-row')
           .nextAll(':visible').first()
