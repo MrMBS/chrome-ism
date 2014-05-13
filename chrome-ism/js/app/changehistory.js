@@ -1,8 +1,8 @@
 define(['Backbone','underscore'], function (Backbone,_) {
   var ChangeHistory = function (switchList) {
-    var self = this;
-    _.extend(self,Backbone.Events);
-    self.listenTo(switchList, 'update:overrides', function (updates) {
+    var history = {};
+    _.extend(history,Backbone.Events);
+    history.listenTo(switchList, 'update:overrides', function (updates) {
       chrome.storage.sync.get('overrideHistory', function (items) {
         items.overrideHistory = items.overrideHistory || {};
         _(updates).each(function (update) {
@@ -12,7 +12,7 @@ define(['Backbone','underscore'], function (Backbone,_) {
       });
     });
 
-    self.getRecent = function (count, callback) {
+    history.getRecent = function (count, callback) {
       chrome.storage.sync.get('overrideHistory', function (items) {
         var mapped = _(items.overrideHistory || [])
           .map(function (val, key) {
@@ -24,6 +24,7 @@ define(['Backbone','underscore'], function (Backbone,_) {
         callback(_(sorted.slice(0,count)).object());
       });
     };
+    return history;
   };
 
   return ChangeHistory;
