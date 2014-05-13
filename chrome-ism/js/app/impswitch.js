@@ -1,5 +1,5 @@
 define(['Backbone'], function (Backbone) {
-  var self = {};
+  var model = {};
 
-  return Backbone.Model.extend(self);
+  return Backbone.Model.extend(model);
 });

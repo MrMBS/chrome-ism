@@ -4,11 +4,10 @@ define(['backbone',
   'app/cookiemanager', 
   'app/errors'], 
 function (Backbone, _, ImpSwitch, cookieManager, errors) {
-  var switches = (function () {
-    var result = {};
-    result.model = ImpSwitch;
+  var options = {
+    model: ImpSwitch,
 
-    result.refresh = function () {
+    refresh: function () {
       var self = this;
       var models = _(self.switches).map(function (impSwitch) {
         var enabled = self.pageHandler(impSwitch);
@@ -25,9 +24,9 @@ function (Backbone, _, ImpSwitch, cookieManager, errors) {
         };
       });
       self.reset(models);
-    };
+    },
 
-    var refreshOverrides = function () {
+    refreshOverrides: function () {
       var self = this;
       var changes = [];
       _(self.models).each(function (model) {
@@ -40,16 +39,16 @@ function (Backbone, _, ImpSwitch, cookieManager, errors) {
         }
       });
       self.trigger('update:overrides', changes);
-    };
+    },
 
-    result.process = function (switches) {
+    process: function (switches) {
       if (!pageHandler)
         throw new Error(errors.boardNotConfigured);
       this.switches = switches;
       this.refresh();
-    };
+    },
 
-    result.sync = function (method,callback) {
+    sync: function (method,callback) {
       var self = this;
       switch (method) {
         case 'read':
@@ -65,17 +64,15 @@ function (Backbone, _, ImpSwitch, cookieManager, errors) {
           callback && callback();
           break;
       }
-    };
+    },
 
-    result.initialize = function (options) {
+    initialize: function (options) {
       this.pageHandler = options.pageHandler;
       this.switches = options.switches;
-    };
+    },
+  };
 
-    return result;
-  })();
-
-  var Switches = Backbone.Collection.extend(switches);
+  var Switches = Backbone.Collection.extend(options);
 
   return Switches;
 });

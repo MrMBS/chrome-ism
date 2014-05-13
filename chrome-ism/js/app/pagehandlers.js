@@ -1,7 +1,7 @@
 define(['underscore','app/errors'], function (_,errors) {
-  var self = {};
+  var handlers = {};
 
-  self.projectNameMapping = {
+  handlers.projectNameMapping = {
     'Modernization': 5
   };
 
@@ -47,7 +47,7 @@ define(['underscore','app/errors'], function (_,errors) {
     };
   };
 
-  self.get = function (settings,projects) {
+  handlers.get = function (settings,projects) {
     switch(settings.serverRole){
       case 1:
         return buildDevHandler(settings,projects);
@@ -59,5 +59,5 @@ define(['underscore','app/errors'], function (_,errors) {
     throw new Error(errors.invalidServerRole);
   };
 
-  return self;
+  return handlers;
 });

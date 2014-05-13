@@ -1,5 +1,5 @@
 define(['app/config','underscore', 'async'], function (config,_,async) {
-  var self = {};
+  var manager = {};
   var switchMap = {};
 
   var tryParse = function (cookie) {
@@ -13,7 +13,7 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
     }
   };
 
-  self.getCookieSwitchMap = function (callback) {
+  manager.getCookieSwitchMap = function (callback) {
     var query = {
       url: config.settingsDevUrl
     };
@@ -61,7 +61,7 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
     return {url: url, domain: domain, name: name, value: value};
   };
 
-  self.setCookieSwitchMap = function (map,callback) {
+  manager.setCookieSwitchMap = function (map,callback) {
     var enabled = [];
     var disabled = [];
     _(map).each(function (on, name) {
@@ -84,7 +84,7 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
       });
   };
 
-  self.getAccessToken = function (callback) {
+  manager.getAccessToken = function (callback) {
     var query = {
       url: config.deploymentUrl,
       name: config.accessTokenCookie
@@ -94,5 +94,5 @@ define(['app/config','underscore', 'async'], function (config,_,async) {
     });
   };
 
-  return self;
+  return manager;
 });
