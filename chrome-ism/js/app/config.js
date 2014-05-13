@@ -6,6 +6,7 @@ define([], function () {
     accessTokenCookie: 'access_token',
     enabledCookie: 'explicitlyEnabled',
     disabledCookie: 'explicitlyDisabled',
-    switchSettingsPath: '/implementationswitch/settings'
+    switchSettingsPath: '/implementationswitch/settings',
+    productionHost: 'clients.mindbodyonline.com'
   };
 });

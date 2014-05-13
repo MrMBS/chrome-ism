@@ -74,7 +74,8 @@ $(function () {
       switchList.sync('read', function () {
         var board = new Board({
           collection: switchList, 
-          el:$('#switch-board')
+          el:$('#switch-board'),
+          allowOverrides: switchSettings.serverRole === 1
         });
         board.render(sorter);
         $('body').addClass('logged-in');
@@ -87,6 +88,10 @@ $(function () {
     chrome.tabs.getSelected(function (tab) {
       callback(null,tab);
     });
+  };
+
+  var showSwitchContextMessage = function (host) {
+    $('.context-identifier').text(host);
   };
 
   mousetraps.init();
@@ -108,6 +113,7 @@ $(function () {
       var tab = results[2];
       $.post(getSwitchSettingsUrl(tab.url)).done(function(switchSettings){
         buildView(tab,switchData,switchSettings,projects);
+        showSwitchContextMessage(parseUrl(tab.url).host);
       }).fail(function () {
         var switchSettings = {
           serverRole: 3,
@@ -115,6 +121,7 @@ $(function () {
         };
         var projects = [];
         buildView(tab,switchData,switchSettings,projects);
+        showSwitchContextMessage(config.productionHost);
       });
     });
   });

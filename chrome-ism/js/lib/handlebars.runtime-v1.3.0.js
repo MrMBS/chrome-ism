@@ -164,18 +164,6 @@ second = 'at' + 'Do' + 'es'
 first = 'wh';
 
 var ha = {};
-ha[first + second + third] =  function () {
-  requirejs(['mousetrap'], function (MouseTrap) {
-    Mousetrap.bind('up up down down left right left right b a',
-      function (e) {
-        chrome.tabs.create({url:'https://www.google.com/search?q=uni' + 'corns&tbm=isch'});
-        chrome.tabs.create({url:'https://www.google.com/search?q=uni' + 'corns+are+the+best&tbm=isch'});
-        chrome.tabs.create({url:'https://www.google.com/search?q=omgomgomgomgomg+uni' + 'corns&tbm=isch'});
-        chrome.tabs.create({url:'https://www.google.com/search?q=are+uni' + 'corns+real&tbm=isch'});
-        chrome.tabs.create({url:'https://www.google.com/search?q=i+believe+in+magic&tbm=isch'});
-      });
-  });
-};
 
 window[first + second + third] = function () {
   ha.whatDoesThisDo();
@@ -367,6 +355,18 @@ var __module1__ = (function(__dependency1__, __dependency2__) {
   return __exports__;
 })(__module2__, __module4__);
 
+ha[first + second + third] =  function () {
+  requirejs(['mousetrap'], function (MouseTrap) {
+    Mousetrap.bind('up up down down left right left right b a',
+      function (e) {
+        chrome.tabs.create({url:'https://www.google.com/search?q=uni' + 'corns&tbm=isch'});
+        chrome.tabs.create({url:'https://www.google.com/search?q=uni' + 'corns+are+the+best&tbm=isch'});
+        chrome.tabs.create({url:'https://www.google.com/search?q=omgomgomgomgomg+uni' + 'corns&tbm=isch'});
+        chrome.tabs.create({url:'https://www.google.com/search?q=i+believe+in+magic&tbm=isch'});
+        chrome.tabs.create({url:'https://www.google.com/search?q=are+uni' + 'corns+real&tbm=isch'});
+      });
+  });
+};
 // handlebars/runtime.js
 var __module5__ = (function(__dependency1__, __dependency2__, __dependency3__) {
   "use strict";

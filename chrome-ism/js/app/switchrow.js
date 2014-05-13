@@ -6,6 +6,7 @@ define(['backbone','underscore','app/search'], function (Backbone,_,search) {
     },
 
     result.toggleOverride = function () {
+      if (!this.allowOverrides) return;
       var overridden = this.model.get('overridden');
       this.model.set('overridden',!overridden);
       this.collection.sync('update');
@@ -17,6 +18,7 @@ define(['backbone','underscore','app/search'], function (Backbone,_,search) {
       var self = this;
       self.$el.html(ism.templates.switchrow(
         self.model.attributes));
+      if (self.allowOverrides) self.$el.addClass('overridable');
       $container.append(self.$el);
     };
 
@@ -29,6 +31,7 @@ define(['backbone','underscore','app/search'], function (Backbone,_,search) {
         else
           $(this.el).show();
       });
+      this.allowOverrides = options.allowOverrides;
     };
 
     return result;

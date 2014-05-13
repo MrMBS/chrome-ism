@@ -13,13 +13,17 @@ define(['backbone','underscore', 'app/switchrow'],
           collection: self.collection,
           id: 'switch-row-' + model.id,
           className: 'switch-row',
-          tagName: 'li'
+          tagName: 'li',
+          allowOverrides: self.allowOverrides
         });
       });
       _(self.rows).each(function (row) {
         row.render(self.$('.switch-list'));
       });
       $('#' + self.id).replaceWith(self.$el);
+    },
+    initialize: function (options) {
+      this.allowOverrides = options.allowOverrides;
     }
   };
 

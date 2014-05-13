@@ -47,7 +47,7 @@ module.exports = function(grunt) {
       tests: {
         src: 'test/*.js',
         options: {
-          ui: 'tdd',
+          ui: 'bdd',
           reporter: 'spec'     
         },
       }
@@ -62,7 +62,7 @@ module.exports = function(grunt) {
       },
       scripts: {
         files: ['Gruntfile.js','chrome-ism/js/*.js','js/app/*.js', 'test/*.js'],
-        tasks: ['jshint','cafemocha'],
+        tasks: ['jshint'],
         options: {
           nospawn: true
         }

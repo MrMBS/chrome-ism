@@ -210,7 +210,7 @@ body {
   padding-top: 1px;
   padding-bottom: 5px;
 
-  max-height: @appHeight - 38px;
+  max-height: @appHeight - 58px;
   overflow-y: scroll;
 }
 
@@ -226,7 +226,10 @@ body {
   border-radius: 5px;
   background-color: @lightishGrey;
   &:focus{
-    background-color: @lightGrey;
+    background-color: @lightishGrey - #050505;
+  }
+  &:hover:not(:focus){
+    background-color: @lightishGrey - #020202;
   }
 
   .switch-name-block {
@@ -246,13 +249,13 @@ body {
     background-color: @grey + #222;
     .enabled& {
       background-color: @enabled;
-      .overridden& {
+      .overridable .overridden& {
         background-color: @exp-disabled;
       }
     }
     .disabled&{
       background-color: @disabled;
-      .overridden& {
+      .overridable .overridden& {
         background-color: @exp-enabled;
       }
     }
@@ -264,19 +267,37 @@ body {
     margin-right: 8px;
     font-size: 16px;
     opacity: 0.6;
-    &:hover{ opacity: 1.0; cursor: pointer; }
-    color: @grey + #111;
-    .enabled& {
+    .overridable &:hover{ opacity: 1.0; cursor: pointer; }
+    color: @grey + #222;
+    .overridable .enabled& {
       color: @enabled;
       .overridden& {
         color: @exp-disabled;
       }
     }
-    .disabled&{
+    .overridable .disabled&{
       color: @disabled;
       .overridden& {
         color: @exp-enabled;
       }
+    }
+  }
+}
+
+.switches-context{
+  background-color: @lightishGrey - #050505;
+  padding-right: 4px;
+  text-align: right;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  .context-msg {
+    font-family: @sans;
+    color: @grey;
+    .context-identifier{
+      color: @grey - #151515;
     }
   }
 }
