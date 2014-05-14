@@ -3,6 +3,7 @@
 @import url(http://fonts.googleapis.com/css?family=Raleway:900,400);
 @import url(http://fonts.googleapis.com/css?family=Ubuntu+Mono);
 @import url(http://fonts.googleapis.com/css?family=Droid+Sans+Mono);
+@import url(http://fonts.googleapis.com/css?family=Lora);
 
 @grey: #999;
 @darkGrey: #333;
@@ -24,7 +25,8 @@
 @appHeight: 600px;
 
 @sans: 'Raleway',sans-serif;
-@mono: 'Droid Sans Mono',sans-serif;
+@mono: 'Droid Sans Mono', monospace;
+@serif: 'Lora', serif;
 
 ::-webkit-scrollbar {
     width: 6px;
@@ -318,6 +320,71 @@ body {
     color: @grey - #151515;
   }
 }
+
+.overlay {
+  position: fixed;
+  width: @appWidth;
+  height: @appHeight;
+  top: 0;
+  left: 0;
+  background-color: fadeout(@grey - #111, 20%);
+  .overlay-content{
+    position: fixed;
+    @top: 80px;
+    @left: 15px;
+    height: auto;
+    width: @appWidth - 2 * @left;
+    top: @top;
+    left: @left;
+    border-radius: 5px;
+    background-color: fadeout(@lightishGrey, 10%);
+    z-index: 200;
+    opacity: 1;
+  }
+}
+
+.switch-info {
+  padding: 8px;
+  hr {
+    border: 0;
+    height: 0;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+}
+
+.switch-info-name {
+  margin: 0;
+  font-family: @mono;
+  font-weight: normal;
+  color: @grey - #111;
+  font-size: 18px;
+}
+
+.switch-info-description {
+  font-family: @serif;
+  color: @darkGrey + #222;
+  font-size: 14px;
+}
+
+.switch-info-phase {
+  text-align: right;
+  .phase-name {
+    text-transform: lowercase;
+    font-family: @sans;
+  }
+}
+
+.phase-color-100{ color: desaturate(fadeout(@magenta, 30%), 20%); }
+.phase-color-200{ color: desaturate(fadeout(@magenta, 30%), 20%); }
+.phase-color-300{ color: darken(fadeout(@orange, 30%), 20%); }
+.phase-color-400{ color: darken(fadeout(@orange, 30%), 20%); }
+.phase-color-500{ color: darken(fadeout(@cyan, 30%), 30%); }
+.phase-color-600{ color: darken(fadeout(@cyan, 30%), 30%); }
+.phase-color-700{ color: darken(fadeout(@turquois, 30%), 10%);; }
+.phase-color-800{ color: fadeout(@darkGrey, 30%); }
+.phase-color-900{ color: fadeout(@darkGrey, 30%); }
 
 .hide {
   display: none;

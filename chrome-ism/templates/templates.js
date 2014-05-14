@@ -10,6 +10,30 @@ helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
   return "\r\n<ul class=\"switch-list ul-reset\">\r\n</ul>";
   });
 
+this["ism"]["templates"]["switchinfo"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
+  this.compilerInfo = [4,'>= 1.0.0'];
+helpers = this.merge(helpers, Handlebars.helpers); data = data || {};
+  var buffer = "", stack1, helper, options, functionType="function", escapeExpression=this.escapeExpression, helperMissing=helpers.helperMissing;
+
+
+  buffer += "<div class=\"switch-info\">\r\n  <div class=\"truncate\">\r\n    <h3 class=\"switch-info-name\">";
+  if (helper = helpers.name) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.name); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</h3>\r\n  </div>\r\n  <hr/>\r\n  <div class=\"switch-info-phase\">\r\n    <span class=\"phase-name phase-color-";
+  if (helper = helpers.phaseId) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.phaseId); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "\">"
+    + escapeExpression((helper = helpers.phaseName || (depth0 && depth0.phaseName),options={hash:{},data:data},helper ? helper.call(depth0, (depth0 && depth0.phaseId), options) : helperMissing.call(depth0, "phaseName", (depth0 && depth0.phaseId), options)))
+    + "</span>\r\n  </div>\r\n  <p class=\"switch-info-description\">";
+  if (helper = helpers.description) { stack1 = helper.call(depth0, {hash:{},data:data}); }
+  else { helper = (depth0 && depth0.description); stack1 = typeof helper === functionType ? helper.call(depth0, {hash:{},data:data}) : helper; }
+  buffer += escapeExpression(stack1)
+    + "</p>\r\n</div>";
+  return buffer;
+  });
+
 this["ism"]["templates"]["switchrow"] = Handlebars.template(function (Handlebars,depth0,helpers,partials,data) {
   this.compilerInfo = [4,'>= 1.0.0'];
 helpers = this.merge(helpers, Handlebars.helpers); data = data || {};

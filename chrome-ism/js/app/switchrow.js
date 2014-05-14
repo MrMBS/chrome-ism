@@ -1,7 +1,8 @@
 define(['backbone','underscore','app/search'], function (Backbone,_,search) {
   var options = {
     events: {
-      'click .status-flipper': 'toggleOverride'
+      'click .status-flipper': 'toggleOverride',
+      'info': 'showSwitchInfo'
     },
 
     toggleOverride: function () {
@@ -11,6 +12,12 @@ define(['backbone','underscore','app/search'], function (Backbone,_,search) {
       this.collection.sync('update');
       var $flex = $(this.el).find('.row-flex');
       $flex.toggleClass('overridden');
+    },
+
+    showSwitchInfo: function () {
+      var html = ism.templates.switchinfo(this.model.attributes);
+      $('.overlay-content').html(html);
+      $('.overlay').toggleClass('hide');
     },
 
     render: function ($container) {

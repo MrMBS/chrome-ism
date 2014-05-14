@@ -21,6 +21,7 @@ A major goal of this extension is to have everything be accomplishable via keybo
 | `ctrl+f`           | search for an implementation switch by name   |
 | `up/down`          | navigate switch list                          |
 | `right/left/enter` | toggle switch on/off                          |
+| `i`                | display switch info                           |
 
 ## Contributing
 First, [fork this repo](https://github.com/mindbody/chrome-ism/fork) and [install node.js](http://nodejs.org/dist/v0.10.28/x64/node-v0.10.28-x64.msi).

@@ -9,8 +9,13 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     $placeholder.remove();
   };
 
+  var overylayShown = function () {
+    return !$('.overlay').hasClass('hide');
+  };
+
   var init = function () {
     Mousetrap.bind(['command+c', 'ctrl+c'], function (e) {
+      if (overylayShown()) return;
       var $focus = $('.row-flex:focus');
       var name = $focus.find('.switch-name').text();
       copyToClipboard(name);
@@ -20,12 +25,18 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     });
 
     Mousetrap.bind(['command+f', 'ctrl+f'], function (e) {
+      if (overylayShown()) return;
       e.preventDefault();
       search.focus();
       search.select();
     });
 
+    Mousetrap.bind('i', function (e) {
+      $('.row-flex:focus').closest('.switch-row').trigger('info');
+    });
+
     Mousetrap.bind(['down'], function (e) {
+      if (overylayShown()) return;
       e.preventDefault();
       var $focus = $('.row-flex:visible:focus');
       if ($focus.length){
@@ -39,6 +50,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     });
 
     Mousetrap.bind(['up'], function (e) {
+      if (overylayShown()) return;
       e.preventDefault();
       var $prev = $('.row-flex:visible:focus')
         .closest('.switch-row')
@@ -53,6 +65,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     });
 
     Mousetrap.bind(['right'], function (e) {
+      if (overylayShown()) return;
       e.preventDefault();
       var $row = $('.row-flex:focus');
       if (!$row.hasClass('overridden'))
@@ -60,6 +73,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     });
 
     Mousetrap.bind(['left'], function (e) {
+      if (overylayShown()) return;
       e.preventDefault();
       var $row = $('.row-flex:focus');
       if ($row.hasClass('overridden'))
@@ -67,6 +81,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     });
 
     Mousetrap.bind('enter', function (e) {
+      if (overylayShown()) return;
       $('.row-flex:focus').find('.status-flipper').trigger('click');
     });
   };

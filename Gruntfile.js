@@ -69,7 +69,7 @@ module.exports = function(grunt) {
         }
       },
       handlebars: {
-        files: ['templates/*.hbs'],
+        files: ['chrome-ism/templates/*.hbs'],
         tasks: ['handlebars'],
         options: {
           nospawn: true
