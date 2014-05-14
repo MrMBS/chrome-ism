@@ -249,13 +249,13 @@ body {
     background-color: @grey + #222;
     .enabled& {
       background-color: @enabled;
-      .overridable .overridden& {
+      .overridable.overridden& {
         background-color: @exp-disabled;
       }
     }
     .disabled&{
       background-color: @disabled;
-      .overridable .overridden& {
+      .overridable.overridden& {
         background-color: @exp-enabled;
       }
     }
@@ -267,15 +267,15 @@ body {
     margin-right: 8px;
     font-size: 16px;
     opacity: 0.6;
-    .overridable &:hover{ opacity: 1.0; cursor: pointer; }
+    .overridable&:hover{ opacity: 1.0; cursor: pointer; }
     color: @grey + #222;
-    .overridable .enabled& {
+    .overridable.enabled& {
       color: @enabled;
       .overridden& {
         color: @exp-disabled;
       }
     }
-    .overridable .disabled&{
+    .overridable.disabled&{
       color: @disabled;
       .overridden& {
         color: @exp-enabled;

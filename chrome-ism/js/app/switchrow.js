@@ -17,7 +17,8 @@ define(['backbone','underscore','app/search'], function (Backbone,_,search) {
       var self = this;
       self.$el.html(ism.templates.switchrow(
         self.model.attributes));
-      if (self.allowOverrides) self.$el.addClass('overridable');
+      if (self.allowOverrides) self.$el.find('.row-flex')
+        .addClass('overridable');
       $container.append(self.$el);
     },
 
