@@ -65,6 +65,10 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
       if ($row.hasClass('overridden'))
         $row.find('.status-flipper').trigger('click');
     });
+
+    Mousetrap.bind('enter', function (e) {
+      $('.row-flex:focus').find('.status-flipper').trigger('click');
+    });
   };
   return {init:init};
 });

@@ -61,7 +61,8 @@ module.exports = function(grunt) {
         }
       },
       scripts: {
-        files: ['Gruntfile.js','chrome-ism/js/*.js','js/app/*.js', 'test/*.js'],
+        files: ['Gruntfile.js','chrome-ism/js/*.js',
+        'chrome-ism/js/app/*.js', 'test/*.js'],
         tasks: ['jshint'],
         options: {
           nospawn: true
