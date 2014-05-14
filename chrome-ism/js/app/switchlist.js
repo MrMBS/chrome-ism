@@ -59,7 +59,7 @@ function (Backbone, _, ImpSwitch, cookieManager, errors) {
           });
           break;
         case 'update':
-          refreshOverrides.apply(self);
+          self.refreshOverrides.apply(self);
           cookieManager.setCookieSwitchMap(this.overrides);
           callback && callback();
           break;
