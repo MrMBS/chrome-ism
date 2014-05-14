@@ -125,5 +125,11 @@ $(function () {
       });
     });
   });
+  chrome.tabs.getSelected(function (tab) {
+    if (~tab.url.indexOf('chrome://')){
+      $('.loader .bouncing').hide();
+      $('.loading-failure').show();
+    }
+  });
 });
 });
