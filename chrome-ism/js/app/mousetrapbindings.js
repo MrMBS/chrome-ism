@@ -35,7 +35,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
       $('.row-flex:focus').closest('.switch-row').trigger('info');
     });
 
-    Mousetrap.bind(['down'], function (e) {
+    Mousetrap.bind(['down', 'j'], function (e) {
       if (overylayShown()) return;
       e.preventDefault();
       var $focus = $('.row-flex:visible:focus');
@@ -49,7 +49,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
       }
     });
 
-    Mousetrap.bind(['up'], function (e) {
+    Mousetrap.bind(['up', 'k'], function (e) {
       if (overylayShown()) return;
       e.preventDefault();
       var $prev = $('.row-flex:visible:focus')
@@ -64,7 +64,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
       }
     });
 
-    Mousetrap.bind(['right'], function (e) {
+    Mousetrap.bind(['right', 'l'], function (e) {
       if (overylayShown()) return;
       e.preventDefault();
       var $row = $('.row-flex:focus');
@@ -72,7 +72,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
         $row.find('.status-flipper').trigger('click');
     });
 
-    Mousetrap.bind(['left'], function (e) {
+    Mousetrap.bind(['left', 'h'], function (e) {
       if (overylayShown()) return;
       e.preventDefault();
       var $row = $('.row-flex:focus');

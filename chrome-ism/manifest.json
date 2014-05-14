@@ -3,7 +3,7 @@
 
   "name": "Implementation Switch Manager",
   "description": "Provides a simple tool for managing implementation switch states.",
-  "version": "0.15",
+  "version": "0.16",
 
   "permissions": [
       "cookies", 
