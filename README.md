@@ -1,4 +1,4 @@
-# Chrome ISM
+# Chrome ISM (BETA)
 Implementation Switch Management via chrome extension. NOTE: In beta. Will not interact with usable data until the settings API is released to production.
 
 ## Installation
