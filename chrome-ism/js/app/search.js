@@ -13,7 +13,7 @@ define(['backbone','underscore'], function (Backbone,_) {
   });
 
   search.expand = function () {
-    $('.header-bar').toggleClass('expand');
+    $('.header-bar').addClass('expand');
   };
 
   search.focus = function () {
