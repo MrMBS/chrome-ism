@@ -21,3 +21,18 @@ A major goal of this extension is to have everything be accomplishable via keybo
 | `ctrl+f`           | search for an implementation switch by name   |
 | `up/down`          | navigate switch list                          |
 | `right/left/enter` | toggle switch on/off                          |
+
+## Contributing
+First, [fork this repo](https://github.com/mindbody/chrome-ism/fork) and [install node.js](http://nodejs.org/dist/v0.10.28/x64/node-v0.10.28-x64.msi).
+
+```
+npm install -g grunt-cli
+npm install -g mocha
+
+cd <location of cloned repo>
+grunt
+```
+
+This will run the grunt watch task which will compile your .less ([LESS](http://lesscss.org/)) and .hbs ([handlebars](http://handlebarsjs.com/)) templates as well as lint your js code using [jshint](http://www.jshint.com/). So long as your code passes linting and all unit tests, feel free to push it up to your fork and submit a pull request and I'll make it a priority to spot check it and merge it in.
+
+All new code should have accompanying unit tests, barring DOM / AJAX / glue logic.
