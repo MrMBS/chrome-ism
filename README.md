@@ -14,7 +14,9 @@ Additionally, cookie overrides have no affect on production environments (previe
 
 ## Command Reference
 A major goal of this extension is to have everything be accomplishable via keyboard commands (I hate mice), so here is a handy reference of all available shortcuts.
-`ctrl+i` - open the extension
-`ctrl+f` - search for an implementation switch by name
-`up/down` - navigate switch list
-`right/left/enter` - toggle switch on/off
+|Command            |                                               |
+|-------------------|-----------------------------------------------|
+|`ctrl+i`           | open the extensions                           |
+|`ctrl+f`           | search for an implementation switch by name   |
+|`up/down`          | navigate switch list                          |
+|`right/left/enter` | toggle switch on/off                          |
