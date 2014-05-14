@@ -16,7 +16,7 @@ Additionally, cookie overrides have no affect on production environments (previe
 A major goal of this extension is to have everything be accomplishable via keyboard commands (I hate mice), so here is a handy reference of all available shortcuts.
 
 | Command            | Description                                   |
-| ------------------ | --------------------------------------------- |
+|:------------------ |:--------------------------------------------- |
 | `ctrl+i`           | open the extensions                           |
 | `ctrl+f`           | search for an implementation switch by name   |
 | `up/down`          | navigate switch list                          |
