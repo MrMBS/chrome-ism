@@ -15,7 +15,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
 
   var searchHasFocus = function () {
     return $('#search-field').is(':focus');
-  }
+  };
 
   var init = function () {
     Mousetrap.bind(['command+c', 'ctrl+c'], function (e) {
