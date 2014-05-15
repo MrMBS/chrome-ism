@@ -28,7 +28,7 @@ define(['mousetrap',
         .animo({animation:'row-highlighter', duration:0.5});
     });
 
-    Mousetrap.bind('?', function (e) {
+    Mousetrap.bind(['?','/'], function (e) {
       if (searchHasFocus()) return;
       commandReference.toggle();
     });

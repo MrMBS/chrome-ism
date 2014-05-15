@@ -1,5 +1,5 @@
 define([], function () {
-  return {
+  var overlay = {
     show: function (html) {
       $('.overlay-content').html(html);
       $('.overlay').removeClass('hide');
@@ -13,4 +13,11 @@ define([], function () {
       return !$('.overlay').hasClass('hide');
     }
   };
+  $(function () {
+    $('.overlay-content').on('click', function (e) {
+      e.stopPropagation();
+    });
+    $('.overlay').on('click', overlay.hide);
+  });
+  return overlay;
 });

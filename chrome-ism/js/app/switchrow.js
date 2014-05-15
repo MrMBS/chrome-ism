@@ -3,6 +3,7 @@ define(['backbone','underscore','app/search', 'app/overlay'],
   var options = {
     events: {
       'click .status-flipper': 'toggleOverride',
+      'dblclick': 'showSwitchInfo',
       'info': 'showSwitchInfo'
     },
 
@@ -16,6 +17,7 @@ define(['backbone','underscore','app/search', 'app/overlay'],
     },
 
     showSwitchInfo: function () {
+      getSelection().empty();
       var html = ism.templates.switchinfo(this.model.attributes);
       overlay.show(html);
     },

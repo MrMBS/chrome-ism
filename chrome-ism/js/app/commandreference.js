@@ -3,6 +3,7 @@ define(['app/overlay'], function (overlay) {
     {keys: 'i', description: 'Display switch info'},
     {keys: 'ctrl+i', description: 'Open the extension'},
     {keys: 'ctrl+f', description: 'Search for a switch by name'},
+    {keys: 'ctrl+c', description: 'Copy switch name to clipboard'},
     {keys: 'up/down', description: 'Navigate switch list'},
     {keys: 'right/left', description: 'Toggle switch on/off'},
     {keys: '?', description: 'Show/hide command reference'}

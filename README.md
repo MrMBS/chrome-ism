@@ -19,6 +19,7 @@ A major goal of this extension is to have everything be accomplishable via keybo
 |:------------------ |:--------------------------------------------- |
 | `ctrl+i`           | open the extension                            |
 | `ctrl+f`           | search for a switch by name                   |
+| `ctrl+c`           | copy switch name to clipboard                 |
 | `up/down`*         | navigate switch list                          |
 | `right/left/enter`*| toggle switch on/off                          |
 | `i`                | display switch info                           |
