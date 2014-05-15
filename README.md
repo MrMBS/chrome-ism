@@ -26,6 +26,7 @@ A major goal of this extension is to have everything be accomplishable via keybo
 | `?`                | show/hide command reference                   |
 
 \* vim navigation (h,j,k,l) can be substituted for the arrow keys (left,down,right,up).
+
 ** you can also use regexes ('/example/i') which will search the switch's name and description
 
 ## Contributing
