@@ -22,6 +22,7 @@ A major goal of this extension is to have everything be accomplishable via keybo
 | `up/down`*         | navigate switch list                          |
 | `right/left/enter`*| toggle switch on/off                          |
 | `i`                | display switch info                           |
+| `?`                | show/hide command reference                   |
 
 \* vim navigation (h,j,k,l) can be substituted for the arrow keys (left,down,right,up).
 

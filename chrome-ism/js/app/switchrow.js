@@ -1,4 +1,5 @@
-define(['backbone','underscore','app/search'], function (Backbone,_,search) {
+define(['backbone','underscore','app/search', 'app/overlay'], 
+  function (Backbone,_,search,overlay) {
   var options = {
     events: {
       'click .status-flipper': 'toggleOverride',
@@ -16,9 +17,7 @@ define(['backbone','underscore','app/search'], function (Backbone,_,search) {
 
     showSwitchInfo: function () {
       var html = ism.templates.switchinfo(this.model.attributes);
-      $('.overlay-content').html(html);
-      $('.overlay').toggleClass('hide');
-      $('.main-wrap').toggleClass('blur');
+      overlay.show(html);
     },
 
     render: function ($container) {

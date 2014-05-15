@@ -1,5 +1,9 @@
-define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
-
+define(['mousetrap',
+  'app/search',
+  'app/overlay',
+  'app/commandreference',
+  'animo'], 
+  function (Mousetrap, search, overlay, commandReference) {
   var copyToClipboard =  function(text) {
     var $placeholder = $("<textarea/>");
     $placeholder.text(text);
@@ -9,19 +13,13 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     $placeholder.remove();
   };
 
-  var overylayShown = function () {
-    return !$('.overlay').hasClass('hide');
-  };
-
   var searchHasFocus = function () {
     return $('#search-field').is(':focus');
   };
 
-  window.Mousetrap = Mousetrap;
-
   var init = function () {
     Mousetrap.bind(['command+c', 'ctrl+c'], function (e) {
-      if (overylayShown()) return;
+      if (overlay.visible()) return;
       var $focus = $('.row-flex:focus');
       var name = $focus.find('.switch-name').text();
       copyToClipboard(name);
@@ -30,16 +28,21 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
         .animo({animation:'row-highlighter', duration:0.5});
     });
 
+    Mousetrap.bind('?', function (e) {
+      if (searchHasFocus()) return;
+      commandReference.toggle();
+    });
+
     Mousetrap.bind(['command+f', 'ctrl+f'], function (e) {
-      if (overylayShown()) return;
+      if (overlay.visible()) return;
       e.preventDefault();
       search.focus();
       search.select();
     });
 
     Mousetrap.bind('i', function (e) {
-      if (overylayShown()) 
-        $('.switch-row').first().trigger('info');
+      if (overlay.visible()) 
+        overlay.hide();
       else
         $('.row-flex:focus').closest('.switch-row').trigger('info');
     });
@@ -47,7 +50,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     Mousetrap.bind(['down', 'j', 'tab'], function (e, key) {
       if (key === 'j' && searchHasFocus()) return;
       e.preventDefault();
-      if (overylayShown()) return;
+      if (overlay.visible()) return;
       var $focus = $('.row-flex:visible:focus');
       if ($focus.length){
         $focus.closest('.switch-row')
@@ -62,7 +65,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     Mousetrap.bind(['up', 'k'], function (e, key) {
       if (key === 'k' && searchHasFocus()) return;
       e.preventDefault();
-      if (overylayShown()) return;
+      if (overlay.visible()) return;
       var $prev = $('.row-flex:visible:focus')
         .closest('.switch-row')
         .prevAll(':visible')
@@ -77,7 +80,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
 
     Mousetrap.bind(['right', 'l'], function (e, key) {
       if (key === 'l' && searchHasFocus()) return;
-      if (overylayShown()) return;
+      if (overlay.visible()) return;
       e.preventDefault();
       var $row = $('.row-flex:focus');
       if (!$row.hasClass('overridden'))
@@ -86,7 +89,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
 
     Mousetrap.bind(['left', 'h'], function (e, key) {
       if (key === 'h' && searchHasFocus()) return;
-      if (overylayShown()) return;
+      if (overlay.visible()) return;
       e.preventDefault();
       var $row = $('.row-flex:focus');
       if ($row.hasClass('overridden'))
@@ -94,7 +97,7 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     });
 
     Mousetrap.bind('enter', function (e) {
-      if (overylayShown()) return;
+      if (overlay.visible()) return;
       $('.row-flex:focus').find('.status-flipper').trigger('click');
     });
   };
