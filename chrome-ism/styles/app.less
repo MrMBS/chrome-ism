@@ -182,6 +182,13 @@ body {
       background-color: rgba(256,256,256,0.5);
       font-family: @mono;
       -webkit-appearance: none;
+
+      &.regex {
+        color: darken(@magenta,10%);
+        &.valid {
+          color: darken(@orange,20%);
+        }
+      }
     }
   }
   &.expand {

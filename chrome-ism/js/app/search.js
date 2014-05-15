@@ -4,12 +4,33 @@ define(['backbone','underscore'], function (Backbone,_) {
 
   var $search = $('#search-field');
 
-  $search.on('keyup', function () {
-    var query = $(this).val().toLowerCase()
+  var searchForString = function (text) {
+    $search.removeClass('regex');
+    var query = text.toLowerCase()
       .replace(/[^A-Za-z0-9]/g,'');
 
     if(~query.indexOf('konami')) window.whatDoesThisDo();
-    search.trigger('input', query);
+    search.trigger('input:text', query);
+  };
+
+  var searchForRegex = function (text) {
+    $search.addClass('regex');
+    var match = /^\/(.*)\/([gimy]*)$/.exec(text);
+    if (match === null) 
+      $search.removeClass('valid');
+    else {
+      $search.addClass('valid');
+      var regex = new RegExp(match[1], match[2]);
+      search.trigger('input:regex', regex);
+    }
+  };
+
+  $search.on('keyup', function () {
+    var searchText = $(this).val();
+    if (searchText[0] === '/')
+      searchForRegex(searchText);
+    else
+      searchForString(searchText);
   });
 
   search.expand = function () {

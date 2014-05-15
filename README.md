@@ -18,7 +18,7 @@ A major goal of this extension is to have everything be accomplishable via keybo
 | Command            | Description                                   |
 |:------------------ |:--------------------------------------------- |
 | `ctrl+i`           | open the extension                            |
-| `ctrl+f`           | search for a switch by name                   |
+| `ctrl+f`           | search for a switch by name**                 |
 | `ctrl+c`           | copy switch name to clipboard                 |
 | `up/down`*         | navigate switch list                          |
 | `right/left/enter`*| toggle switch on/off                          |
@@ -26,6 +26,7 @@ A major goal of this extension is to have everything be accomplishable via keybo
 | `?`                | show/hide command reference                   |
 
 \* vim navigation (h,j,k,l) can be substituted for the arrow keys (left,down,right,up).
+** you can also use regexes ('/example/i') which will search the switch's name and description
 
 ## Contributing
 First, [fork this repo](https://github.com/mindbody/chrome-ism/fork) and [install node.js](http://nodejs.org/dist/v0.10.28/x64/node-v0.10.28-x64.msi).

@@ -31,15 +31,26 @@ define(['backbone','underscore','app/search', 'app/overlay'],
       $container.append(self.$el);
     },
 
+    filterByText: function (query) {
+      var name = this.model.attributes
+        .name.toLowerCase().replace(/[^A-Za-z0-9]/g, '');
+      if (~name.indexOf(query))
+        $(this.el).show();
+      else
+        $(this.el).hide();
+    },
+
+    filterByRegex: function (regex) {
+      if (regex.test(this.model.attributes.name) ||
+        regex.test(this.model.attributes.description))
+        $(this.el).show();
+      else
+        $(this.el).hide();
+    },
+
     initialize: function (options) {
-      this.listenTo(search, 'input', function (query) {
-        var name = this.model.attributes
-          .name.toLowerCase().replace(/[^A-Za-z0-9]/g, '');
-        if (!~name.indexOf(query))
-          $(this.el).hide();
-        else
-          $(this.el).show();
-      });
+      this.listenTo(search, 'input:text', this.filterByText);
+      this.listenTo(search, 'input:regex', this.filterByRegex);
       this.allowOverrides = options.allowOverrides;
     }
   };
