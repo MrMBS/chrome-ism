@@ -18,6 +18,7 @@ define(['backbone','underscore','app/search'], function (Backbone,_,search) {
       var html = ism.templates.switchinfo(this.model.attributes);
       $('.overlay-content').html(html);
       $('.overlay').toggleClass('hide');
+      $('.main-wrap').toggleClass('blur');
     },
 
     render: function ($container) {

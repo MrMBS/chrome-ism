@@ -327,8 +327,10 @@ body {
   height: @appHeight;
   top: 0;
   left: 0;
-  background-color: fadeout(@grey - #111, 20%);
+  background-color: fadeout(#000, 90%);
   .overlay-content{
+    -webkit-filter: none;
+    filter: none;
     position: fixed;
     @top: 80px;
     @left: 15px;
@@ -337,7 +339,7 @@ body {
     top: @top;
     left: @left;
     border-radius: 5px;
-    background-color: fadeout(@lightishGrey, 10%);
+    background-color: fadeout(@lightGrey, 10%);
     z-index: 200;
     opacity: 1;
   }
@@ -388,6 +390,11 @@ body {
 
 .hide {
   display: none;
+}
+
+.blur {
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
 }
 
 .truncate {

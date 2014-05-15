@@ -17,6 +17,8 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     return $('#search-field').is(':focus');
   };
 
+  window.Mousetrap = Mousetrap;
+
   var init = function () {
     Mousetrap.bind(['command+c', 'ctrl+c'], function (e) {
       if (overylayShown()) return;
@@ -36,13 +38,16 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     });
 
     Mousetrap.bind('i', function (e) {
-      $('.row-flex:focus').closest('.switch-row').trigger('info');
+      if (overylayShown()) 
+        $('.switch-row').first().trigger('info');
+      else
+        $('.row-flex:focus').closest('.switch-row').trigger('info');
     });
 
     Mousetrap.bind(['down', 'j', 'tab'], function (e, key) {
       if (key === 'j' && searchHasFocus()) return;
-      if (overylayShown()) return;
       e.preventDefault();
+      if (overylayShown()) return;
       var $focus = $('.row-flex:visible:focus');
       if ($focus.length){
         $focus.closest('.switch-row')
@@ -56,8 +61,8 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
 
     Mousetrap.bind(['up', 'k'], function (e, key) {
       if (key === 'k' && searchHasFocus()) return;
-      if (overylayShown()) return;
       e.preventDefault();
+      if (overylayShown()) return;
       var $prev = $('.row-flex:visible:focus')
         .closest('.switch-row')
         .prevAll(':visible')
