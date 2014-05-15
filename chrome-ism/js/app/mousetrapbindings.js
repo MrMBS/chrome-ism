@@ -13,6 +13,10 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
     return !$('.overlay').hasClass('hide');
   };
 
+  var searchHasFocus = function () {
+    return $('#search-field').is(':focus');
+  }
+
   var init = function () {
     Mousetrap.bind(['command+c', 'ctrl+c'], function (e) {
       if (overylayShown()) return;
@@ -35,7 +39,8 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
       $('.row-flex:focus').closest('.switch-row').trigger('info');
     });
 
-    Mousetrap.bind(['down', 'j'], function (e) {
+    Mousetrap.bind(['down', 'j', 'tab'], function (e, key) {
+      if (key === 'j' && searchHasFocus()) return;
       if (overylayShown()) return;
       e.preventDefault();
       var $focus = $('.row-flex:visible:focus');
@@ -49,7 +54,8 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
       }
     });
 
-    Mousetrap.bind(['up', 'k'], function (e) {
+    Mousetrap.bind(['up', 'k'], function (e, key) {
+      if (key === 'k' && searchHasFocus()) return;
       if (overylayShown()) return;
       e.preventDefault();
       var $prev = $('.row-flex:visible:focus')
@@ -64,7 +70,8 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
       }
     });
 
-    Mousetrap.bind(['right', 'l'], function (e) {
+    Mousetrap.bind(['right', 'l'], function (e, key) {
+      if (key === 'l' && searchHasFocus()) return;
       if (overylayShown()) return;
       e.preventDefault();
       var $row = $('.row-flex:focus');
@@ -72,7 +79,8 @@ define(['mousetrap','app/search','animo'], function (Mousetrap, search) {
         $row.find('.status-flipper').trigger('click');
     });
 
-    Mousetrap.bind(['left', 'h'], function (e) {
+    Mousetrap.bind(['left', 'h'], function (e, key) {
+      if (key === 'h' && searchHasFocus()) return;
       if (overylayShown()) return;
       e.preventDefault();
       var $row = $('.row-flex:focus');
