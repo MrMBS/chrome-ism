@@ -338,8 +338,11 @@ body {
     width: @appWidth - 2 * @left;
     top: @top;
     left: @left;
+    background-color: fadeout(#fff, 80%);
+    border-style: solid;
+    border-color: fadeout(@lightishGrey, 50%);
+    border-width: 1px;
     border-radius: 5px;
-    background-color: fadeout(@lightGrey, 10%);
     z-index: 200;
     opacity: 1;
   }
