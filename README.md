@@ -23,7 +23,7 @@ A major goal of this extension is to have everything be accomplishable via keybo
 | `right/left/enter`*| toggle switch on/off                          |
 | `i`                | display switch info                           |
 
-* vim navigation (h,j,k,l) can be substituted for the arrow keys (left,down,right,up).
+\* vim navigation (h,j,k,l) can be substituted for the arrow keys (left,down,right,up).
 
 ## Contributing
 First, [fork this repo](https://github.com/mindbody/chrome-ism/fork) and [install node.js](http://nodejs.org/dist/v0.10.28/x64/node-v0.10.28-x64.msi).
