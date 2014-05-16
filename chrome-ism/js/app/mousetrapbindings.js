@@ -13,6 +13,10 @@ define(['mousetrap',
     $placeholder.remove();
   };
 
+  var loggedOut = function () {
+    return $('body').hasClass('logged-out');
+  };
+
   var searchHasFocus = function () {
     return $('#search-field').is(':focus');
   };
@@ -48,7 +52,7 @@ define(['mousetrap',
     });
 
     Mousetrap.bind(['down', 'j', 'tab'], function (e, key) {
-      if (key === 'j' && searchHasFocus()) return;
+      if (key === 'j' && searchHasFocus() || loggedOut()) return;
       e.preventDefault();
       if (overlay.visible()) return;
       var $focus = $('.row-flex:visible:focus');
