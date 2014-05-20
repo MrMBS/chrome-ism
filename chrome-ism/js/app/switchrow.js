@@ -3,7 +3,6 @@ define(['backbone','underscore','app/search', 'app/overlay'],
   var options = {
     events: {
       'click .status-flipper': 'toggleOverride',
-      'dblclick .status-flipper': 'showSwitchInfo',
       'dblclick': 'showSwitchInfo',
       'info': 'showSwitchInfo'
     },
