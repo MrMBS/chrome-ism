@@ -1,5 +1,5 @@
-# Chrome ISM (BETA)
-Implementation Switch Management via chrome extension. NOTE: In beta. Will not interact with usable data until the settings API is released to production.
+# Chrome ISM
+Implementation Switch Management via chrome extension. NOTE: Only works on environments set up to use the new implementation switches API.
 
 ## Installation
 Using Chrome, [click here](https://github.com/mindbody/chrome-ism/blob/master/chrome-ism.crx?raw=true) to download the extension, then navigate to the extensions pane (`chrome://extensions`) and drag and drop the `chrome-ism.crx` file onto the page.
