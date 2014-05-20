@@ -5,6 +5,12 @@
   "description": "Provides a simple tool for managing implementation switch states.",
   "version": "1.0",
 
+  "icons": {
+    "16": "images/hammer.png",
+    "48": "images/hammer.png",
+    "128": "images/hammer.png"
+  },
+
   "permissions": [
       "cookies", 
       "tabs",
