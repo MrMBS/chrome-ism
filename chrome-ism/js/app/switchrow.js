@@ -3,11 +3,12 @@ define(['backbone','underscore','app/search', 'app/overlay'],
   var options = {
     events: {
       'click .status-flipper': 'toggleOverride',
+      'dblclick .status-flipper': 'showSwitchInfo',
       'dblclick': 'showSwitchInfo',
       'info': 'showSwitchInfo'
     },
 
-    toggleOverride: function () {
+    toggleOverride: function (e) {
       if (!this.allowOverrides) return;
       var overridden = this.model.get('overridden');
       this.model.set('overridden',!overridden);
@@ -16,7 +17,8 @@ define(['backbone','underscore','app/search', 'app/overlay'],
       $flex.toggleClass('overridden');
     },
 
-    showSwitchInfo: function () {
+    showSwitchInfo: function (e) {
+      if ($(e.target).hasClass('glyphicon')) return;
       getSelection().empty();
       var html = ism.templates.switchinfo(this.model.attributes);
       overlay.show(html);
